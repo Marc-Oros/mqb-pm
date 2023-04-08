@@ -119,9 +119,6 @@ public class DashboardFragment extends CarFragment {
 
     private String androidClockFormat = "hh:mm a";
     int dashboardNum=1;
-    private String googleGeocodeLocationStr = null;
-    private String googleMapsLocationStr = null;
-    private GeocodeLocationService mGeocodingService;
 
     private Button mBtnNext, mBtnPrev;
     private String mLabelClockL, mLabelClockC, mLabelClockR;
@@ -145,8 +142,6 @@ public class DashboardFragment extends CarFragment {
     private static final String FORMAT_VOLT = "%.1fV";
     private static final String FORMAT_VOLT0 = "-,-V";
     private boolean celsiusTempUnit;
-    private boolean showStreetName, useGoogleGeocoding, forceGoogleGeocoding;
-    private String sourceLocation;
     private String selectedFont;
     private boolean selectedPressureUnits;
     private int updateSpeed = 2000;
@@ -571,10 +566,7 @@ public class DashboardFragment extends CarFragment {
         if (stagingDone == null) {
             stagingDone = !sharedPreferences.getBoolean("stagingActive", true);
         }
-        showStreetName = sharedPreferences.getBoolean("showStreetNameInTitle", true);
-        useGoogleGeocoding = sharedPreferences.getBoolean("useGoogleGeocoding", false);
-        forceGoogleGeocoding = sharedPreferences.getBoolean("forceGoogleGeocoding", false);
-        sourceLocation = sharedPreferences.getString("locationSourceData","Geocoding");
+
         fueltanksize = Float.parseFloat(sharedPreferences.getString("fueltanksize", "50"));
 
         float speedLeft = MaxspeedLeft[dashboardNum];
@@ -946,20 +938,6 @@ public class DashboardFragment extends CarFragment {
         }
     }
 
-    private BroadcastReceiver onNoticeGoogleNavigationUpdate = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            //String text = intent.getStringExtra("text"); // Not used right now
-            googleMapsLocationStr = intent.getStringExtra("title");
-        }
-    };
-    private BroadcastReceiver onNoticeGoogleNavigationClosed = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            googleMapsLocationStr = null;
-        }
-    };
-
     @Override
     public void onStart() {
         super.onStart();
@@ -974,18 +952,7 @@ public class DashboardFragment extends CarFragment {
         getContext().bindService(serviceIntent, mVexServiceConnection, Context.BIND_AUTO_CREATE);
         startTorque();
         createAndStartUpdateTimer();
-        if (useGoogleGeocoding) {
-            if(!getContext().bindService(new Intent(getContext(), GeocodeLocationService.class),
-                    mGeocodingServiceConnection,
-                    Context.BIND_AUTO_CREATE)) {
-                Log.e("Geocode", "Cannot bind?!");
-            }
-        }
 
-        LocalBroadcastManager.getInstance(getContext())
-                .registerReceiver(onNoticeGoogleNavigationUpdate, new IntentFilter("GoogleNavigationUpdate"));
-        LocalBroadcastManager.getInstance(getContext())
-                .registerReceiver(onNoticeGoogleNavigationClosed, new IntentFilter("GoogleNavigationClosed"));
         PreferenceManager.getDefaultSharedPreferences(getContext()).registerOnSharedPreferenceChangeListener(preferenceChangeListener);
         onPreferencesChangeHandler();
         // Force reload of components
@@ -995,49 +962,13 @@ public class DashboardFragment extends CarFragment {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
         Dashboard2_On = sharedPreferences.getBoolean("d2_active", false);  //Enabled dasboard2.
         Dashboard3_On = sharedPreferences.getBoolean("d3_active", false);  //Enabled dasboard3
+        // @TODO Delete code related to these 2 or fix for non MQB
         Dashboard4_On = sharedPreferences.getBoolean("d4_active", false);  //Enabled dasboard4
         //Dashboard5_On = sharedPreferences.getBoolean("d5_active", false);  //Enabled dasboard5
         Dashboard5_On = false;
     }
 
-    private final GeocodeLocationService.IGeocodeResult geocodeResultListener = new GeocodeLocationService.IGeocodeResult() {
-        @Override
-        public void onNewGeocodeResult(Address result) {
-            StringBuilder sb = new StringBuilder();
-            String tmp = result.getThoroughfare();
-            if (tmp != null)
-                sb.append(tmp);
-            if (sb.length() != 0)
-                sb.append(", ");
-            tmp = result.getSubAdminArea(); //Town
-            if (tmp != null)
-                sb.append(tmp);
-            sb.append(' ');
-        //    tmp = result.getPostalCode();  //PostalCode
-        //    if (tmp != null)
-        //        sb.append("("+tmp+")");
-            tmp = result.getUrl();  //URL -> Altitude
-            if (tmp != null)
-            sb.append("("+tmp+")");
 
-            googleGeocodeLocationStr = sb.toString();
-        }
-    };
-
-    private final ServiceConnection mGeocodingServiceConnection = new ServiceConnection() {
-        @Override
-        public void onServiceConnected(ComponentName name, IBinder service) {
-            mGeocodingService = ((GeocodeLocationService.LocalBinder)service).getService();
-            mGeocodingService.setOnNewGeocodeListener(geocodeResultListener);
-            Log.d("Geocode", "Service connected");
-        }
-
-        @Override
-        public void onServiceDisconnected(ComponentName name) {
-            Log.e("Geocode", "Service disconnected");
-            mGeocodingService = null;
-        }
-    };
 
     private void startTorque() {
         Intent intent = new Intent();
@@ -1089,9 +1020,6 @@ public class DashboardFragment extends CarFragment {
 
         mStatsClient.unregisterListener(mCarStatsListener);
         getContext().unbindService(mVexServiceConnection);
-        if (useGoogleGeocoding) {
-            getContext().unbindService(mGeocodingServiceConnection);
-        }
 
         if (torqueBind)
             try {
@@ -1100,12 +1028,6 @@ public class DashboardFragment extends CarFragment {
             } catch (Exception E) {
                 throw E;
             }
-
-
-        LocalBroadcastManager.getInstance(getContext())
-                .unregisterReceiver(onNoticeGoogleNavigationUpdate);
-        LocalBroadcastManager.getInstance(getContext())
-                .unregisterReceiver(onNoticeGoogleNavigationClosed);
 
         PreferenceManager.getDefaultSharedPreferences(getContext()).unregisterOnSharedPreferenceChangeListener(preferenceChangeListener);
 
@@ -2438,39 +2360,6 @@ public class DashboardFragment extends CarFragment {
 
         if (!Objects.equals(currentTitleValue, currentTime)) {
             mTitleElement.setText(currentTime);
-        }
-
-        // Display location in left side of Title  bar
-        if (showStreetName) {
-            String leftTitle="";
-            if (sourceLocation.equals("Geocoding")) {
-                leftTitle = googleGeocodeLocationStr;
-            } else {
-                if (googleMapsLocationStr != null && !googleMapsLocationStr.isEmpty()) {
-                    leftTitle = googleMapsLocationStr;
-                }
-            }
-            if (!forceGoogleGeocoding) {
-                String location1 = (String) mLastMeasurements.get("Nav_CurrentPosition.Street");
-                String location2 = (String) mLastMeasurements.get("Nav_CurrentPosition.City");
-
-                if (location1 != null && checkTextNav(location1)) location1 = null;
-                if (location2 != null && checkTextNav(location2)) location2 = null;
-
-                if (location1 == null && location2 != null) leftTitle = location2;
-                if (location1 != null && location2 == null) leftTitle = location1;
-                if (location1 != null && location2 != null) leftTitle = location1 + ", " + location2;
-            }
-
-            if (!currentLeftTitleValue.equals(leftTitle)) {
-                mTitleElementLeft.setText(leftTitle);
-            }
-
-            if (leftTitle == "") {
-                    mTitleIcon2.setVisibility(View.INVISIBLE);
-                } else {
-                    mTitleIcon2.setVisibility(View.VISIBLE);
-                }
         }
 
         // Display temperature in right side of Title  bar

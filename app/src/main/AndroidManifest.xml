@@ -45,8 +45,6 @@
                 <category android:name="com.google.android.gms.car.category.CATEGORY_PROJECTION_OEM" />
             </intent-filter>
         </service>
-        <service
-            android:name=".GeocodeLocationService" android:exported="false" android:enabled="true"/>
         <service android:name=".CarStatsService" android:enabled="true"/>
         <service
             android:name=".LogUploadService"

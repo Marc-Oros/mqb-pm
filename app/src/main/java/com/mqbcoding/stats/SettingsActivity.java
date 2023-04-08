@@ -42,7 +42,6 @@ public class SettingsActivity extends AppCompatActivity {
     static final String EXTRA_AUTHORIZATION_INTENT = "authorizationRequest";
 
     private static final String PERMISSION_CAR_VENDOR_EXTENSION = "com.google.android.gms.permission.CAR_VENDOR_EXTENSION";
-    public static final String PREF_LOCATION = "useGoogleGeocoding";
 
     private GoogleAccountCredential mCredential;
     private Intent mCurrentAuthorizationIntent;
@@ -148,7 +147,6 @@ public class SettingsActivity extends AppCompatActivity {
         if (checkGooglePlayServicesAvailable()) {
             haveGooglePlayServices();
         }
-        checkLocationPermissions();
     }
 
     void showGooglePlayServicesAvailabilityErrorDialog(final int connectionStatusCode) {
@@ -217,7 +215,6 @@ public class SettingsActivity extends AppCompatActivity {
                             R.string.location_permission_denied_toast, Toast.LENGTH_LONG).show();
                     SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(this);
                     SharedPreferences.Editor editor = settings.edit();
-                    editor.putBoolean(PREF_LOCATION, false);
                     editor.apply();
                     editor.commit();
                 }
@@ -250,22 +247,6 @@ public class SettingsActivity extends AppCompatActivity {
         });
 
         chooseAccountIfNeeded();
-    }
-
-    void checkLocationPermissions() {
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
-        if (preferences.getBoolean(PREF_LOCATION, false)) {
-            List<String> permissionsToRequest = new ArrayList<>();
-            if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
-                    != PackageManager.PERMISSION_GRANTED) {
-                permissionsToRequest.add(Manifest.permission.ACCESS_FINE_LOCATION);
-            }
-            if (!permissionsToRequest.isEmpty()) {
-                ActivityCompat.requestPermissions(this,
-                        permissionsToRequest.toArray(new String[0]),
-                        REQUEST_LOCATION_PERMISSION);
-            }
-        }
     }
 
     void chooseAccount() {
