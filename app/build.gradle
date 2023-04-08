@@ -8,7 +8,7 @@ def versionPatch = 0
 
 android {
     compileSdkVersion 28
-    buildToolsVersion '27.0.3'
+    buildToolsVersion '28.0.3'
     defaultConfig {
         applicationId "com.mqbcoding.stats"
         minSdkVersion 22
