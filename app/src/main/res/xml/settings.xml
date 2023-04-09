@@ -591,45 +591,6 @@
             android:key="statsLoggingActive"
             android:summary="@string/pref_stats_logging_summary"
             android:title="@string/pref_stats_logging_title" />
-        <CheckBoxPreference
-            android:defaultValue="false"
-            android:dependency="statsLoggingActive"
-            android:key="uploadToBigquery"
-            android:title="@string/pref_upload_to_bigquery_title" />
-        <Preference
-            android:dependency="uploadToBigquery"
-            android:key="accountName"
-            android:title="@string/pref_choose_account_title" />
-        <EditTextPreference
-            android:dependency="uploadToBigquery"
-            android:key="bigqueryProjectId"
-            android:title="@string/pref_bigquery_project_id_title" />
-        <EditTextPreference
-            android:dependency="uploadToBigquery"
-            android:key="bigqueryDataset"
-            android:title="@string/pref_bigquery_dataset_title" />
-        <EditTextPreference
-            android:defaultValue="@string/pref_bigquery_table_default"
-            android:dependency="uploadToBigquery"
-            android:key="bigqueryTable"
-            android:title="@string/pref_bigquery_table_title" />
-        <Preference
-            android:key="bigqueryReuploadAll"
-            android:dependency="uploadToBigquery"
-            android:title="@string/pref_bigquery_reupload_all_title" />
-        <Preference
-            android:dependency="uploadToBigquery"
-            android:key="bigqueryReuploadLast"
-            android:title="@string/pref_bigquery_reupload_last_title" />
-        <Preference
-            android:dependency="uploadToBigquery"
-            android:key="kickUploads"
-            android:title="@string/pref_kick_uploads_title" />
-        <Preference
-            android:key="cancelUploads"
-            android:dependency="uploadToBigquery"
-            android:title="@string/pref_cancel_uploads_title" />
-
     </PreferenceCategory>
 
 </PreferenceScreen>

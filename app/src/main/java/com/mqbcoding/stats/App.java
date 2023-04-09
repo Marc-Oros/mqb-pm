@@ -28,9 +28,6 @@ import java.util.logging.Logger;
 import static java.lang.Thread.dumpStack;
 
 public class App extends Application {
-    static final String PREF_ACCOUNT_NAME = "accountName";
-
-    private GoogleAccountCredential mCredential;
     private Thread.UncaughtExceptionHandler defaultExceptionHandler;
 
 
@@ -53,12 +50,6 @@ public class App extends Application {
 
         PreferenceManager.setDefaultValues(this, R.xml.settings, false);
 
-        // Google Accounts
-        mCredential =
-                GoogleAccountCredential.usingOAuth2(this,
-                        Arrays.asList(BigqueryScopes.BIGQUERY, BigqueryScopes.BIGQUERY_INSERTDATA));
-        SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(this);
-        mCredential.setSelectedAccountName(settings.getString(App.PREF_ACCOUNT_NAME, null));
         // Save original exception handler before we change it
         defaultExceptionHandler = Thread.getDefaultUncaughtExceptionHandler();
         Thread.setDefaultUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler() {
@@ -91,9 +82,5 @@ public class App extends Application {
         StringWriter sw = new StringWriter();
         ex.printStackTrace(new PrintWriter(sw));
         return sw.toString();
-    }
-
-    public GoogleAccountCredential getGoogleCredential() {
-        return mCredential;
     }
 }

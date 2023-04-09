@@ -76,101 +76,7 @@ public class SettingsFragment extends PreferenceFragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
-
         addPreferencesFromResource(R.xml.settings);
-
-        findPreference("accountName").setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-            @Override
-            public boolean onPreferenceClick(Preference preference) {
-                SettingsActivity activity = (SettingsActivity) getActivity();
-                activity.chooseAccount();
-                return true;
-            }
-        });
-
-        findPreference("bigqueryReuploadAll").setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-            @Override
-            public boolean onPreferenceClick(Preference preference) {
-                try {
-                    List<File> files = findLogs();
-                    if (files.isEmpty()) {
-                        Toast.makeText(getActivity(), R.string.reupload_last_nothing_to_do,
-                                Toast.LENGTH_SHORT).show();
-                    } else {
-                        for (File f: files) {
-                            LogUploadService.schedule(getActivity(), f);
-                        }
-                        Toast.makeText(getActivity(), R.string.bigquery_reupload_ok,
-                                Toast.LENGTH_SHORT).show();
-                    }
-                } catch (Exception e) {
-                    Log.w(TAG, "Re-upload error", e);
-                    Toast.makeText(getActivity(), R.string.bigquery_reupload_all_failed,
-                            Toast.LENGTH_SHORT).show();
-                }
-                return true;
-            }
-        });
-        findPreference("bigqueryReuploadLast").setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-            @Override
-            public boolean onPreferenceClick(Preference preference) {
-                try {
-                    List<File> files = findLogs();
-                    if (files.isEmpty()) {
-                        Toast.makeText(getActivity(), R.string.reupload_last_nothing_to_do,
-                                Toast.LENGTH_SHORT).show();
-                    } else {
-                        LogUploadService.schedule(getActivity(), files.get(files.size() - 1));
-                        Toast.makeText(getActivity(), R.string.bigquery_reupload_ok,
-                                Toast.LENGTH_SHORT).show();
-                    }
-                } catch (Exception e) {
-                    Log.w(TAG, "Re-upload error", e);
-                    Toast.makeText(getActivity(), R.string.pref_bigquery_reupload_last_failed,
-                            Toast.LENGTH_SHORT).show();
-                }
-                return true;
-            }
-        });
-
-        findPreference("kickUploads").setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-            @Override
-            public boolean onPreferenceClick(Preference preference) {
-                JobScheduler scheduler = (JobScheduler) getActivity().getSystemService(Context.JOB_SCHEDULER_SERVICE);
-                assert scheduler != null;
-                List<JobInfo> jobs = scheduler.getAllPendingJobs();
-                if (jobs.isEmpty()) {
-                    Toast.makeText(getActivity(), R.string.kick_uploads_nothing_to_do,
-                            Toast.LENGTH_SHORT).show();
-                } else {
-                    for (JobInfo job : jobs) {
-                        JobInfo newJob = new JobInfo.Builder(job.getId(), job.getService())
-                                .setPersisted(job.isPersisted())
-                                .setExtras(job.getExtras())
-                                .setRequiredNetworkType(job.getNetworkType())
-                                .setOverrideDeadline(1)
-                                .build();
-                        scheduler.schedule(newJob);
-                    }
-                    Toast.makeText(getActivity(), R.string.kick_uploads_done,
-                            Toast.LENGTH_SHORT).show();
-                }
-                return true;
-            }
-        });
-
-        findPreference("cancelUploads").setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-            @Override
-            public boolean onPreferenceClick(Preference preference) {
-                JobScheduler scheduler = (JobScheduler) getActivity().getSystemService(Context.JOB_SCHEDULER_SERVICE);
-                assert scheduler != null;
-                scheduler.cancelAll();
-                Toast.makeText(getActivity(), R.string.cancel_uploads_done,
-                        Toast.LENGTH_SHORT).show();
-                return true;
-            }
-        });
 
         findPreference("listProviders").setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override
@@ -195,10 +101,6 @@ public class SettingsFragment extends PreferenceFragment {
     public void onResume() {
         super.onResume();
 
-        bindPreferenceSummaryToValue(findPreference("accountName"));
-        bindPreferenceSummaryToValue(findPreference("bigqueryProjectId"));
-        bindPreferenceSummaryToValue(findPreference("bigqueryDataset"));
-        bindPreferenceSummaryToValue(findPreference("bigqueryTable"));
         bindPreferenceSummaryToValue(findPreference("oilTempThreshold"));
         bindPreferenceSummaryToValue(findPreference("fueltanksize"));
         bindPreferenceSummaryToValue(findPreference("performanceTitle1"));

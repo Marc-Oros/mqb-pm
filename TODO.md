@@ -1,2 +1,3 @@
 - Delete exlap functionality or stub it and replace it with Torque data
 - Double check that data in arrays.xml is ok
+- Double check permissions that might no longer be needed (accts, location)

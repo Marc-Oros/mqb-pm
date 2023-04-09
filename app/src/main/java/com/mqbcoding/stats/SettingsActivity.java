@@ -43,7 +43,6 @@ public class SettingsActivity extends AppCompatActivity {
 
     private static final String PERMISSION_CAR_VENDOR_EXTENSION = "com.google.android.gms.permission.CAR_VENDOR_EXTENSION";
 
-    private GoogleAccountCredential mCredential;
     private Intent mCurrentAuthorizationIntent;
 
     @Override
@@ -54,7 +53,6 @@ public class SettingsActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         App app = (App) getApplication();
-        mCredential = app.getGoogleCredential();
 
         handleIntent();
 
@@ -143,141 +141,6 @@ public class SettingsActivity extends AppCompatActivity {
         }
 
         CarStatsClient.requestPermissions(this);
-
-        if (checkGooglePlayServicesAvailable()) {
-            haveGooglePlayServices();
-        }
-    }
-
-    void showGooglePlayServicesAvailabilityErrorDialog(final int connectionStatusCode) {
-        runOnUiThread(new Runnable() {
-            public void run() {
-                Dialog dialog = GoogleApiAvailability.getInstance().getErrorDialog(
-                        SettingsActivity.this, connectionStatusCode, REQUEST_GOOGLE_PLAY_SERVICES);
-                dialog.show();
-            }
-        });
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        switch (requestCode) {
-            case REQUEST_GOOGLE_PLAY_SERVICES:
-                if (resultCode == Activity.RESULT_OK) {
-                    haveGooglePlayServices();
-                } else {
-                    checkGooglePlayServicesAvailable();
-                }
-                break;
-
-            case REQUEST_AUTHORIZATION:
-                mCurrentAuthorizationIntent = null;
-                if (resultCode != Activity.RESULT_OK) {
-                    chooseAccountIfNeeded();
-                }
-                break;
-
-            case REQUEST_ACCOUNT_PICKER:
-                if (resultCode == Activity.RESULT_OK && data != null && data.getExtras() != null) {
-                    String accountName = data.getExtras().getString(AccountManager.KEY_ACCOUNT_NAME);
-                    if (accountName != null) {
-                        mCredential.setSelectedAccountName(accountName);
-                        SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(this);
-                        SharedPreferences.Editor editor = settings.edit();
-                        editor.putString(App.PREF_ACCOUNT_NAME, accountName);
-                        editor.apply();
-                    }
-                }
-                break;
-        }
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-
-        switch (requestCode) {
-            case REQUEST_ACCOUNTS_PERMISSION:
-                if (grantResults.length == 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    chooseAccountIfNeeded();
-                } else {
-                    SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(this);
-                    SharedPreferences.Editor editor = settings.edit();
-                    editor.putBoolean(LogUploadService.PREF_BIGQUERY_ENABLED, false);
-                    editor.apply();
-                }
-                break;
-            case REQUEST_LOCATION_PERMISSION:
-                if (grantResults.length == 1 && grantResults[0] != PackageManager.PERMISSION_GRANTED) {
-                    Toast.makeText(getApplicationContext(),
-                            R.string.location_permission_denied_toast, Toast.LENGTH_LONG).show();
-                    SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(this);
-                    SharedPreferences.Editor editor = settings.edit();
-                    editor.apply();
-                    editor.commit();
-                }
-                break;
-        }
-    }
-
-    /** Check that Google Play services APK is installed and up to date. */
-    private boolean checkGooglePlayServicesAvailable() {
-        GoogleApiAvailability availability = GoogleApiAvailability.getInstance();
-        final int connectionStatusCode = availability.isGooglePlayServicesAvailable(this);
-        if (availability.isUserResolvableError(connectionStatusCode)) {
-            showGooglePlayServicesAvailabilityErrorDialog(connectionStatusCode);
-            return false;
-        }
-        return true;
-    }
-
-    private void haveGooglePlayServices() {
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
-        preferences.registerOnSharedPreferenceChangeListener(new SharedPreferences.OnSharedPreferenceChangeListener() {
-            @Override
-            public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String s) {
-                switch (s) {
-                    case LogUploadService.PREF_BIGQUERY_ENABLED:
-                        chooseAccountIfNeeded();
-                        break;
-                }
-            }
-        });
-
-        chooseAccountIfNeeded();
-    }
-
-    void chooseAccount() {
-        if (!checkAccountsPermission()) {
-            return;
-        }
-        startActivityForResult(mCredential.newChooseAccountIntent(), REQUEST_ACCOUNT_PICKER);
-    }
-
-    void chooseAccountIfNeeded() {
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
-        if (!preferences.getBoolean(LogUploadService.PREF_BIGQUERY_ENABLED, false)) {
-            return;
-        }
-        if (!checkAccountsPermission()) {
-            return;
-        }
-        if (mCredential.getSelectedAccountName() == null) {
-            chooseAccount();
-        }
-    }
-
-    private boolean checkAccountsPermission() {
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.GET_ACCOUNTS)
-                != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(SettingsActivity.this,
-                    new String[] {Manifest.permission.GET_ACCOUNTS},
-                    REQUEST_ACCOUNTS_PERMISSION);
-            return false;
-        }
-        return true;
     }
 
 }

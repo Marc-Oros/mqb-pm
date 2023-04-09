@@ -63,7 +63,6 @@ public class CarStatsService extends CarModeService {
         mStatsClient = new CarStatsClient(this);
 
         mStatsLogger = new CarStatsLogger(this, mStatsClient, new Handler());
-        mStatsLogger.registerListener(mStatsLoggerListener);
         mStatsClient.registerListener(mStatsLogger);
 
         mOilTempMonitor = new OilTempMonitor(this, new Handler());
@@ -124,11 +123,4 @@ public class CarStatsService extends CarModeService {
 
         super.onDestroy();
     }
-
-    private final CarStatsLogger.Listener mStatsLoggerListener = new CarStatsLogger.Listener() {
-        @Override
-        public void onLogFileComplete(File logFile) {
-            LogUploadService.schedule(CarStatsService.this, logFile);
-        }
-    };
 }
