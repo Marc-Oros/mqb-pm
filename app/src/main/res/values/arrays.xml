@@ -51,43 +51,6 @@
 
     <!-- Names of Entries for clock data settings -->
     <string-array name="ClockDataElementsEntries">
-        <item>@string/element_absChargingAirPressure</item>
-        <item>@string/element_relChargingAirPressure</item>
-        <item>@string/element_batteryVoltage</item>
-        <item>@string/element_coolantTemperature</item>
-        <item>@string/element_oilTemperature</item>
-        <item>@string/element_gearboxOilTemperature</item>
-        <item>@string/element_outsideTemperature</item>
-        <item>@string/element_vehicleSpeed</item>
-        <item>@string/element_engineSpeed</item>
-        <item>@string/element_lateralAcceleration</item>
-        <item>@string/element_longitudinalAcceleration</item>
-        <item>@string/element_yawRate</item>
-        <item>@string/element_wheelAngle</item>
-        <item>@string/element_acceleratorPosition</item>
-        <item>@string/element_brakePressure</item>
-        <item>@string/element_powermeter</item>
-        <item>@string/element_currentTorque</item>
-        <item>@string/element_currentOutputPower</item>
-        <item>@string/element_EcoHMI_Score.AvgShort</item>
-        <item>@string/element_EcoHMI_Score.AvgTrip</item>
-        <item>@string/element_currentConsumptionPrimary</item>
-        <item>@string/element_currentConsumptionSecondary</item>
-        <item>@string/element_cycleConsumptionPrimary</item>
-        <item>@string/element_cycleConsumptionSecondary</item>
-        <item>@string/element_tankLevelPrimary</item>
-        <item>@string/element_tankLevelSecondary</item>
-        <item>@string/element_navAltitude</item>
-        <item>@string/element_navHeading</item>
-        <item>@string/element_tyrePressureRR</item>
-        <item>@string/element_tyrePressureRL</item>
-        <item>@string/element_tyrePressureFR</item>
-        <item>@string/element_tyrePressureFL</item>
-        <item>@string/element_tyreTemperatureRR</item>
-        <item>@string/element_tyreTemperatureRL</item>
-        <item>@string/element_tyreTemperatureFR</item>
-        <item>@string/element_tyreTemperatureFL</item>
-
         <!-- PIDs from Torque -->
         <item>@string/element_torque_rpm</item>
         <item>@string/element_torque_speed</item>
@@ -139,43 +102,6 @@
     <!-- Values/query strings for each of the Entries for clock data settings -->
     <!-- These NEED TO be aligned with ClockDataElementsEntries!-->
     <string-array name="ClockDataElementsValues">
-        <item>exlap-absChargingAirPressure</item>
-        <item>exlap-relChargingAirPressure</item>
-        <item>exlap-batteryVoltage</item>
-        <item>exlap-coolantTemperature</item>
-        <item>exlap-oilTemperature</item>
-        <item>exlap-gearboxOilTemperature</item>
-        <item>exlap-outsideTemperature</item>
-        <item>exlap-vehicleSpeed</item>
-        <item>exlap-engineSpeed</item>
-        <item>exlap-lateralAcceleration</item>
-        <item>exlap-longitudinalAcceleration</item>
-        <item>exlap-yawRate</item>
-        <item>exlap-wheelAngle</item>
-        <item>exlap-acceleratorPosition</item>
-        <item>exlap-brakePressure</item>
-        <item>exlap-powermeter</item>
-        <item>exlap-currentTorque</item>
-        <item>exlap-currentOutputPower</item>
-        <item>exlap-EcoHMI_Score.AvgShort</item>
-        <item>exlap-EcoHMI_Score.AvgTrip</item>
-        <item>exlap-currentConsumptionPrimary</item>
-        <item>exlap-currentConsumptionSecondary</item>
-        <item>exlap-cycleConsumptionPrimary</item>
-        <item>exlap-cycleConsumptionSecondary</item>
-        <item>exlap-tankLevelPrimary</item>
-        <item>exlap-tankLevelSecondary</item>
-        <item>exlap-Nav_Altitude</item>
-        <item>exlap-Nav_Heading</item>
-        <item>exlap-tyrePressures.pressureRearRight</item>
-        <item>exlap-tyrePressures.pressureRearLeft</item>
-        <item>exlap-tyrePressures.pressureFrontRight</item>
-        <item>exlap-tyrePressures.pressureFrontLeft</item>
-        <item>exlap-tyreTemperatures.temperatureRearRight</item>
-        <item>exlap-tyreTemperatures.temperatureRearLeft</item>
-        <item>exlap-tyreTemperatures.temperatureFrontRight</item>
-        <item>exlap-tyreTemperatures.temperatureFrontLeft</item>
-
         <item>torque-rpm_0x0c</item>
         <item>torque-speed_0x0d</item>
         <item>torque-fuelpressure_0x0a</item>
@@ -225,42 +151,6 @@
     </string-array>
 
     <string-array name="ClockDataElementsIcons">
-        <item>@drawable/ic_exlap</item>
-        <item>@drawable/ic_exlap</item>
-        <item>@drawable/ic_exlap</item>
-        <item>@drawable/ic_exlap</item>
-        <item>@drawable/ic_exlap</item>
-        <item>@drawable/ic_exlap</item>
-        <item>@drawable/ic_exlap</item>
-        <item>@drawable/ic_exlap</item>
-        <item>@drawable/ic_exlap</item>
-        <item>@drawable/ic_exlap</item>
-        <item>@drawable/ic_exlap</item>
-        <item>@drawable/ic_exlap</item>
-        <item>@drawable/ic_exlap</item>
-        <item>@drawable/ic_exlap</item>
-        <item>@drawable/ic_exlap</item>
-        <item>@drawable/ic_exlap</item>
-        <item>@drawable/ic_exlap</item>
-        <item>@drawable/ic_exlap</item>
-        <item>@drawable/ic_exlap</item>
-        <item>@drawable/ic_exlap</item>
-        <item>@drawable/ic_exlap</item>
-        <item>@drawable/ic_exlap</item>
-        <item>@drawable/ic_exlap</item>
-        <item>@drawable/ic_exlap</item>
-        <item>@drawable/ic_exlap</item>
-        <item>@drawable/ic_exlap</item>
-        <item>@drawable/ic_exlap</item>
-        <item>@drawable/ic_exlap</item>
-        <item>@drawable/ic_exlap</item>
-        <item>@drawable/ic_exlap</item>
-        <item>@drawable/ic_exlap</item>
-        <item>@drawable/ic_exlap</item>
-        <item>@drawable/ic_exlap</item>
-        <item>@drawable/ic_exlap</item>
-        <item>@drawable/ic_exlap</item>
-        <item>@drawable/ic_exlap</item>
         <item>@drawable/ic_torque</item>
         <item>@drawable/ic_torque</item>
         <item>@drawable/ic_torque</item>
@@ -308,50 +198,6 @@
     <!-- Names of each of the Entries for dashboard elements settings -->
     <string-array name="TextDataElementsEntries">
         <item>@string/element_none</item>
-        <item>@string/element_batteryVoltage</item>
-        <item>@string/element_coolantTemperature</item>
-        <item>@string/element_oilTemperature</item>
-        <item>@string/element_gearboxOilTemperature</item>
-        <item>@string/element_outsideTemperature</item>
-        <item>@string/element_currentOutputPower</item>
-        <item>@string/element_currentTorque</item>
-        <item>@string/element_tankLevelPrimary</item>
-        <item>@string/element_tankLevelSecondary</item>
-        <item>@string/element_engineSpeed</item>
-        <item>@string/element_vehicleSpeed</item>
-        <item>@string/element_currentGear</item>
-        <item>@string/element_lateralAcceleration</item>
-        <item>@string/element_longitudinalAcceleration</item>
-        <item>@string/element_yawRate</item>
-        <item>@string/element_wheelAngle</item>
-        <item>@string/element_acceleratorPosition</item>
-        <item>@string/element_brakePressure</item>
-        <item>@string/element_powermeter</item>
-        <item>@string/element_EcoHMI_Score.AvgShort</item>
-        <item>@string/element_EcoHMI_Score.AvgTrip</item>
-        <item>@string/element_navAltitude</item>
-        <item>@string/element_navHeading</item>
-        <item>@string/element_blinkingState</item>
-        <item>@string/element_navLongitude</item>
-        <item>@string/element_navLatitude</item>
-        <item>@string/element_soundVolume</item>
-        <item>@string/element_odometer</item>
-        <item>@string/element_tyreStateRR</item>
-        <item>@string/element_tyreStateRL</item>
-        <item>@string/element_tyreStateFR</item>
-        <item>@string/element_tyreStateFL</item>
-        <item>@string/element_tyrePressureRR</item>
-        <item>@string/element_tyrePressureRL</item>
-        <item>@string/element_tyrePressureFR</item>
-        <item>@string/element_tyrePressureFL</item>
-        <item>@string/element_tyreTemperatureRR</item>
-        <item>@string/element_tyreTemperatureRL</item>
-        <item>@string/element_tyreTemperatureFR</item>
-        <item>@string/element_tyreTemperatureFL</item>
-
-        <item>@string/element_shortTermConsumptionPrimary</item>
-        <item>@string/element_shortTermConsumptionSecondary</item>
-        <item>@string/element_VIN</item>
 
         <!-- PIDs from Torque -->
         <item>@string/element_torque_rpm</item>
@@ -406,54 +252,6 @@
     <!-- These NEED TO be aligned with TextDataElementsEntries!-->
     <string-array name="TextDataElementsValues">
         <item>none</item>
-        <item>batteryVoltage</item>
-        <item>coolantTemperature</item>
-        <item>oilTemperature</item>
-        <item>gearboxOilTemperature</item>
-        <item>outsideTemperature</item>
-        <item>currentOutputPower</item>
-        <item>currentTorque</item>
-        <item>tankLevelPrimary</item>
-        <item>tankLevelSecondary</item>
-        <item>engineSpeed</item>
-        <item>vehicleSpeed</item>
-        <item>currentGear</item>
-        <item>lateralAcceleration</item>
-        <item>longitudinalAcceleration</item>
-        <item>yawRate</item>
-        <item>wheelAngle</item>
-        <item>acceleratorPosition</item>
-        <item>brakePressure</item>
-        <item>powermeter</item>
-        <item>EcoHMI_Score.AvgShort</item>
-        <item>EcoHMI_Score.AvgTrip</item>
-        <item>Nav_Altitude</item>
-        <item>Nav_Heading</item>
-        <item>blinking_State</item>
-        <item>Nav_CurrentPosition.Longitude</item>
-        <item>Nav_CurrentPosition.Latitude</item>
-        <item>Sound_Volume</item>
-        <item>totalDistance.distanceValue</item>
-        <item>tyreStates.stateRearRight</item>
-        <item>tyreStates.stateRearLeft</item>
-        <item>tyreStates.stateFrontRight</item>
-        <item>tyreStates.stateFrontLeft</item>
-
-        <item>tyrePressures.pressureRearRight</item>
-        <item>tyrePressures.pressureRearLeft</item>
-        <item>tyrePressures.pressureFrontRight</item>
-        <item>tyrePressures.pressureFrontLeft</item>
-
-        <item>tyreTemperatures.temperatureRearRight</item>
-        <item>tyreTemperatures.temperatureRearLeft</item>
-        <item>tyreTemperatures.temperatureFrontRight</item>
-        <item>tyreTemperatures.temperatureFrontLeft</item>
-
-
-        <item>shortTermConsumptionPrimary</item>
-        <item>shortTermConsumptionSecondary</item>
-
-        <item>vehicleIdenticationNumber.VIN</item>
         <!-- PIDs from Torque -->
         <!-- Use PIDs like this: torque_<description>_<pid> -->
         <item>torque-rpm_0x0c</item>
@@ -505,49 +303,6 @@
 
     <string-array name="TextDataElementsIcons">
         <item>@drawable/ic_none</item>
-        <item>@drawable/ic_exlap</item>
-        <item>@drawable/ic_exlap</item>
-        <item>@drawable/ic_exlap</item>
-        <item>@drawable/ic_exlap</item>
-        <item>@drawable/ic_exlap</item>
-        <item>@drawable/ic_exlap</item>
-        <item>@drawable/ic_exlap</item>
-        <item>@drawable/ic_exlap</item>
-        <item>@drawable/ic_exlap</item>
-        <item>@drawable/ic_exlap</item>
-        <item>@drawable/ic_exlap</item>
-        <item>@drawable/ic_exlap</item>
-        <item>@drawable/ic_exlap</item>
-        <item>@drawable/ic_exlap</item>
-        <item>@drawable/ic_exlap</item>
-        <item>@drawable/ic_exlap</item>
-        <item>@drawable/ic_exlap</item>
-        <item>@drawable/ic_exlap</item>
-        <item>@drawable/ic_exlap</item>
-        <item>@drawable/ic_exlap</item>
-        <item>@drawable/ic_exlap</item>
-        <item>@drawable/ic_exlap</item>
-        <item>@drawable/ic_exlap</item>
-        <item>@drawable/ic_exlap</item>
-        <item>@drawable/ic_exlap</item>
-        <item>@drawable/ic_exlap</item>
-        <item>@drawable/ic_exlap</item>
-        <item>@drawable/ic_exlap</item>
-        <item>@drawable/ic_exlap</item>
-        <item>@drawable/ic_exlap</item>
-        <item>@drawable/ic_exlap</item>
-        <item>@drawable/ic_exlap</item>
-        <item>@drawable/ic_exlap</item>
-        <item>@drawable/ic_exlap</item>
-        <item>@drawable/ic_exlap</item>
-        <item>@drawable/ic_exlap</item>
-        <item>@drawable/ic_exlap</item>
-        <item>@drawable/ic_exlap</item>
-        <item>@drawable/ic_exlap</item>
-        <item>@drawable/ic_exlap</item>
-        <item>@drawable/ic_exlap</item>
-        <item>@drawable/ic_exlap</item>
-        <item>@drawable/ic_exlap</item>
         <item>@drawable/ic_torque</item>
         <item>@drawable/ic_torque</item>
         <item>@drawable/ic_torque</item>
@@ -592,31 +347,6 @@
         <item>@drawable/ic_none</item>
     </string-array>
 
-
-    <string-array name="TitleDataElementsEntries">
-        <item>@string/element_none</item>
-        <item>@string/element_locationinfo</item>
-        <item>@string/element_mediainfo</item>
-        <item>@string/element_clock</item>
-    </string-array>
-
-    <string-array name="TitleDataElementsValues">
-        <item>None</item>
-        <item>Location</item>
-        <item>Media</item>
-        <item>Clock</item>
-    </string-array>
-
-    <string-array name="LocationDataSource">
-        <item>@string/locationSource_googlemaps</item>
-        <item>@string/locationSource_geocoding</item>
-    </string-array>
-
-    <string-array name="LocationValueSource">
-        <item>Google Maps</item>
-        <item>Geocoding</item>
-    </string-array>
-
     <string-array name="fontEntries">
         <item>@string/font_segments</item>
         <item>@string/font_vw</item>
@@ -628,7 +358,6 @@
         <item>@string/font_skoda</item>
         <item>@string/font_larabie</item>
         <item>@string/font_ford</item>
-
     </string-array>
 
     <string-array name="fontValues">
@@ -734,144 +463,9 @@
     </array>
 
 
-    <!--
-
-    The following is a list of all other exlap data elements currently known.
-
-    *Booleans*
-    todo: Add an optional icon area to the main dash view showing these items?
-        accIsActive
-        acceleratorKickDown
-        clutch (not_clutchedIn)
-        coastingIsActive (true, false)
-        displayNightDesign
-        driverIsBraking     <- pretty distracting data, maybe not add it.
-        fuelWarningPrimaryTank
-        fuelWarningSecondaryTank
-        clampState.clamp_S
-        clampState.clamp_15
-        clampState.clamp_X
-
-    *Text*
-        blinkingState (off, left, right)
-        car_vehicleInformation
-        car_vehicleState
-        context_States
-        engineTypes
-        fuelLevelState
-        gearTransmissionMode (position_B, position_D)
-        vehicleDate
-        vehicleIdenticationNumber
-        vehicleTime_hour(8.0), vehicleTime_minute (14.0)
-
-    Todo: add one of these and test if the unit actually forwards this data over exlap
-    *media-related*
-        mediaBrowser_FollowMode
-        mediaBrowser_ListState
-        mediaBrowser_Path
-        mediaBrowser_PathCurrentTrack
-        media_AvailableSources
-        media_PlayMode
-        media_PlayerState
-        media_Track
-        *radio*
-            radio_AMPresets
-            radio_AMStations
-            radio_AvailableBands
-            radio_DABEnsembles
-            radio_DABPresets
-            radio_DABServiceComponent
-            radio_DABServices
-            radio_FMPresets
-            radio_FMStations
-            radio_FrequencyRanges
-            radio_TA
-            Radio_Text.Artist
-            Radio_Text.Title
-            Radio_Text.ImageAvailable
-            Radio_Text.Image
-            Radio_Text.Album
-            Radio_Tuner.ShortName
-        sound_BalanceFader
-        sound_BalanceFaderSetup
-        sound_VolumeSetup
-
-    Todo: Clocks or dashboard elements can be made for most of these
-    *float*
-        *consumption data*
-            consumptionLongTermGeneral
-            consumptionShortTermGeneral
-            longTermConsumptionPrimary
-            longTermConsumptionSecondary
-            shortTermConsumptionPrimary
-            shortTermConsumptionSecondary
-        *other dashboard items*
-            maxChargingAirPressure  - use this to determine min/max for charging air pressure max.
-            maxOutputPower      - use this to determine min/max for output clock? Might not be wise, since the output might be higher than the car thinks in some cases
-            modCount
-            oilLevel
-            recuperationLevel
-            totalDistance
-
-        nav_LastDestinations
-
-    *unknown data formats*
-        seatHeater_zone1
-        seatHeater_zone2
-        system_DayNight
-        system_HMISkin
-        system_Language
-        system_ProximityRecognition
-        system_RestrictionMode
-        system_UnitDistance
-        system_activeSource
-
-
-    Todo: read these during initialisation, so the app is set up in the same way as the car
-    *units*
-        unitDateFormat
-        unitPressure.pressureUnit
-        unitTemperature.temperatureUnit
-        unitTimeFormat
-        unitVolume.volumeUnit
-
-
-
-
-    *Other data elements, found om 13/2, still need to be categorized:
-    torqueDistribution
-    refillVolume
-    hevOperationMode (sustaining)
-
-
-    more data elements:
-    tyreStates.compoundState
-    oilLevel.showBargraph
-    oilLevel.refillVolume
-    oilLevel.systemAvailable
-    oilLevel.warnings
-    recuperationLevel.recupLevel
-
-    Car_vehicleInformation.Type (car derivate, e.g. 0203070200 for regular Golf 7)
-    Car_vehicleInformation.StickerBits
-
-    Nav_CurrentPosition.Street
-    Nav_CurrentPosition.Housenumber
-    Nav_CurrentPosition.Description
-    Nav_CurrentPosition.PostalCode
-    driveMode.activeProfile
-engineTypes.primaryEngine
-engineTypes.secondaryEngine
-suspensionProfile
-suspensionStates.height_frontLeft and other wheel locations (0-100 %)
-
-fuelWarningPrimaryTank true/false
-fuelWarningSecondaryTank true/false
-System_ProximityRecognition.InRange
-
-
-
+<!--
 todo: add these torque PIDs
+@TODO: Check feasibility of this
 EXTRA_TRIP_MPG      = 0xFF1205;
 EXTRA_TRIP_KPL      = 0xFF1206;
 ACCEL_X_FILTERED    = 0xFF1250;
@@ -886,7 +480,6 @@ o2 sensor1 equivalence ratio (alternate) = 34
 gps vs obd speed differnce = ff1237
 
 barometric pressure from vehicle = 33
-
-     -->
+-->
 
 </resources>
