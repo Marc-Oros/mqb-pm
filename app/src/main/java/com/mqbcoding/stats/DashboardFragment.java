@@ -112,6 +112,10 @@ public class DashboardFragment extends CarFragment {
     public final String QUERY_TORQUE_LATERALGFORCE = "torque-lateralgforce_0xff1221";
     public final String QUERY_TORQUE_HORSEPOWER = "torque-horsepower_0xff1226";
     public final String QUERY_TORQUE_TORQUE = "torque-torque_0xff1225";
+    public final String QUERY_TORQUE_GRYOILPRESSURE = "torque-gryoilpressure_0x221074";
+    public final String QUERY_TORQUE_GRYTRANSTEMP = "torque-grytranstemp_0x221638";
+    public final String QUERY_TORQUE_GRYSTEERINGANGLE = "torque-grysteeringangle_0x221004";
+    public final String QUERY_TORQUE_GRYCOUPLINGTEMP = "torque-grycouplingtemp_0x221026";
 
     private final String TAG = "DashboardFragment";
     private Timer updateTimer;
@@ -1552,6 +1556,20 @@ public class DashboardFragment extends CarFragment {
             case QUERY_TORQUE_TORQUE:
                 label.setText(getString(R.string.label_torque));
                 break;
+            case QUERY_TORQUE_GRYOILPRESSURE:
+                label.setBackground(getContext().getDrawable(R.drawable.ic_oilp));
+                break;
+            case QUERY_TORQUE_GRYTRANSTEMP:
+                value.setText(FORMAT_TEMPERATURE0);
+                label.setBackground(getContext().getDrawable(R.drawable.ic_gearbox));
+                break;
+            case QUERY_TORQUE_GRYSTEERINGANGLE:
+                label.setBackground(getContext().getDrawable(R.drawable.ic_wheelangle));
+                break;
+            case QUERY_TORQUE_GRYCOUPLINGTEMP:
+                value.setText(FORMAT_TEMPERATURE0);
+                label.setText("AWD");
+                break;
             default:
                 label.setText("");
                 value.setText("");
@@ -1791,6 +1809,18 @@ public class DashboardFragment extends CarFragment {
             case QUERY_TORQUE_TORQUE:
                 setupClock(icon, "ic_none", "TRQ", clock, false, torqueUnit, 0, 400, "integer", "integer");
                 break;
+            case QUERY_TORQUE_GRYOILPRESSURE:
+                setupClock(icon, "ic_oilp", "", clock, false, torqueUnit, torqueMin, torqueMax, "float", "float");
+                break;
+            case QUERY_TORQUE_GRYTRANSTEMP:
+                setupClock(icon, "ic_gearbox", "", clock, true, torqueUnit, torqueMin, torqueMax, "float", "float");
+                break;
+            case QUERY_TORQUE_GRYSTEERINGANGLE:
+                setupClock(icon, "ic_wheelangle", "", clock, false, torqueUnit, torqueMin, torqueMax, "float", "float");
+                break;
+            case QUERY_TORQUE_GRYCOUPLINGTEMP:
+                setupClock(icon, "ic_none", "AWD", clock, true, torqueUnit, torqueMin, torqueMax, "float", "float");
+                break;
         }
 
         // make the icon appear in the color of unitTextColor
@@ -1893,9 +1923,11 @@ public class DashboardFragment extends CarFragment {
                     case QUERY_TORQUE_LATERALGFORCE:
                     case QUERY_TORQUE_HORSEPOWER:
                     case QUERY_TORQUE_TORQUE:
+                    case QUERY_TORQUE_GRYSTEERINGANGLE:
                         clock.setUnit(unitText); // use the units Torque is providing
                         break;
                     case QUERY_TORQUE_TURBOBOOST:
+                    case QUERY_TORQUE_GRYOILPRESSURE:
                         if (unitText.equals("psi") && pressureUnit.equals("bar")) {
                             clockValue = clockValue / 14.5037738f;
                             unitText = "bar";
@@ -1914,6 +1946,8 @@ public class DashboardFragment extends CarFragment {
                     case QUERY_TORQUE_EXHAUSTGASTEMPBANK1SENSOR2:
                     case QUERY_TORQUE_EXHAUSTGASTEMPBANK1SENSOR3:
                     case QUERY_TORQUE_EXHAUSTGASTEMPBANK1SENSOR4:
+                    case QUERY_TORQUE_GRYCOUPLINGTEMP:
+                    case QUERY_TORQUE_GRYTRANSTEMP:
                         if (unitText.equals("°C") && temperatureUnit.equals("°C")) {
                             unitText = "°C";
                         } else {
@@ -2257,6 +2291,10 @@ public class DashboardFragment extends CarFragment {
                 case QUERY_TORQUE_VOLTAGEMODULE:
                 case QUERY_TORQUE_LONGITUDINALGFORCE:
                 case QUERY_TORQUE_LATERALGFORCE:
+                case QUERY_TORQUE_GRYOILPRESSURE:
+                case QUERY_TORQUE_GRYTRANSTEMP:
+                case QUERY_TORQUE_GRYSTEERINGANGLE:
+                case QUERY_TORQUE_GRYCOUPLINGTEMP:
                     // TODO: this seems useless, becuase we check the torqueQuery earlier than this
 
                     queryElement = queryElement.substring(queryElement.lastIndexOf('_') + 1);
@@ -2274,7 +2312,6 @@ public class DashboardFragment extends CarFragment {
                         Log.e(TAG, "Error: " + e.getMessage());
                     }
                     break;
-                // the following torque values should have the unit as label
                 case QUERY_TORQUE_TURBOBOOST:
                     queryElement = queryElement.substring(queryElement.lastIndexOf('_') + 1);
                     queryElement = queryElement.substring(2);
@@ -2298,6 +2335,7 @@ public class DashboardFragment extends CarFragment {
                         Log.e(TAG, "Error: " + e.getMessage());
                     }
                     break;
+                // the following torque values should have the unit as label
                 case QUERY_TORQUE_RPM:
                 case QUERY_TORQUE_SPEED:
                 case QUERY_TORQUE_HORSEPOWER:

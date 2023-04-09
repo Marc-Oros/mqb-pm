@@ -99,6 +99,10 @@
         <item>@string/element_torque_lateralgforce</item>
         <item>@string/element_torque_horsepower</item>
         <item>@string/element_torque_torque</item>
+        <item>@string/element_torque_gry_oilpressure</item>
+        <item>@string/element_torque_gry_transtemperature</item>
+        <item>@string/element_torque_gry_steeringangle</item>
+        <item>@string/element_torque_gry_couplingtemp</item>
     </string-array>
 
     <!-- Values/query strings for each of the Entries for clock data settings -->
@@ -153,11 +157,19 @@
         <item>torque-lateralgforce_0xff1221</item>
         <item>torque-horsepower_0xff1226</item>
         <item>torque-torque_0xff1225</item>
+        <item>torque-gryoilpressure_0x221074</item>
+        <item>torque-grytranstemp_0x221638</item>
+        <item>torque-grysteeringangle_0x221004</item>
+        <item>torque-grycouplingtemp_0x221026</item>
     </string-array>
 
     <string-array name="DataElementsIcons">
         <item>@drawable/ic_none</item>
         <item>@drawable/ic_none</item>
+        <item>@drawable/ic_torque</item>
+        <item>@drawable/ic_torque</item>
+        <item>@drawable/ic_torque</item>
+        <item>@drawable/ic_torque</item>
         <item>@drawable/ic_torque</item>
         <item>@drawable/ic_torque</item>
         <item>@drawable/ic_torque</item>

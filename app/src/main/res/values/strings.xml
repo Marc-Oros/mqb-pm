@@ -168,6 +168,10 @@
     <string name="element_torque_lateralgforce">G meter (Lateral)</string>
     <string name="element_torque_horsepower">Horsepower (Approximation)</string>
     <string name="element_torque_torque">Torque (Approximation)</string>
+    <string name="element_torque_gry_oilpressure">(GR Yaris) Engine Oil Pressure</string>
+    <string name="element_torque_gry_transtemperature">(GR Yaris) M/T Oil Temperature</string>
+    <string name="element_torque_gry_steeringangle">(GR Yaris) Steering Angle</string>
+    <string name="element_torque_gry_couplingtemp">(GR Yaris) Temperature Sense Value in Coupling</string>
 
     <!-- Labels (for clocks without icons) -->
     <string name="label_afrc">AFR(c)</string>
