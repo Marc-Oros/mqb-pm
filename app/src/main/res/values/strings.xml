@@ -342,4 +342,6 @@
     <string name="locationSource_geocoding">Geocoding</string>
     <string name="element_torque_longitudinalgforce">G meter (Longitudinal)</string>
     <string name="element_torque_lateralgforce">G meter (Lateral)</string>
+    <string name="label_longitudinalgforce">Lon. G</string>
+    <string name="label_lateralgforce">Lat. G</string>
 </resources>

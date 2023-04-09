@@ -1493,12 +1493,10 @@ public class DashboardFragment extends CarFragment {
                 label.setBackground(getContext().getDrawable(R.drawable.ic_voltage));
                 break;
             case "torque-longitudinalgforce_0xff1220":
-                label.setText("Lon. G");
-                label.setBackground(getContext().getDrawable(R.drawable.ic_longitudinal));
+                label.setText(getString(R.string.label_longitudinalgforce));
                 break;
             case "torque-lateralgforce_0xff1221":
-                label.setText("Lat. G");
-                label.setBackground(getContext().getDrawable(R.drawable.ic_lateral));
+                label.setText(getString(R.string.label_lateralgforce));
                 break;
             default:
                 label.setText("");
