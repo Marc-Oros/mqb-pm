@@ -81,7 +81,6 @@
         <item>@string/element_torque_transmissiontemp</item>
         <item>@string/element_torque_transmissiontemp2</item>
         <item>@string/element_torque_pressurecontrol</item>
-
         <item>@string/element_torque_intakemanifoldpressure</item>
         <item>@string/element_torque_commandedequivalenceratiolambda</item>
         <item>@string/element_torque_o2sensor1equivalenceratio</item>
@@ -89,13 +88,11 @@
         <item>@string/element_torque_enginecoolanttemp</item>
         <item>@string/element_torque_ambientairtemp</item>
         <item>@string/element_torque_catalysttemperature</item>
-
         <item>@string/element_torque_fuelrailpressure</item>
         <item>@string/element_torque_exhaustgastempbank1sensor1</item>
         <item>@string/element_torque_exhaustgastempbank1sensor2</item>
         <item>@string/element_torque_exhaustgastempbank1sensor3</item>
         <item>@string/element_torque_exhaustgastempbank1sensor4</item>
-
         <item>@string/element_test</item>
     </string-array>
 
@@ -126,7 +123,6 @@
         <item>torque-phonebarometer_0xff1270</item>
         <item>torque-obdadaptervoltage_0xff1238</item>
         <item>torque-fuellevel_0x2f</item>
-
         <item>torque-voltagemodule_0x42</item>
         <item>torque-oiltemperature_0x5c</item>
         <item>torque-transmissiontemp_0x0105</item>
@@ -139,15 +135,12 @@
         <item>torque-enginecoolanttemp_0x05</item>
         <item>torque-ambientairtemp_0x46</item>
         <item>torque-catalysttemperature_0x3c</item>
-
         <item>torque-fuelrailpressure_0x23</item>
         <item>torque-exhaustgastempbank1sensor1_0x78</item>
         <item>torque-exhaustgastempbank1sensor2_0xff1282</item>
         <item>torque-exhaustgastempbank1sensor3_0xff1283</item>
         <item>torque-exhaustgastempbank1sensor4_0xff1284</item>
-
         <item>test</item>
-
     </string-array>
 
     <string-array name="ClockDataElementsIcons">
@@ -217,13 +210,11 @@
         <item>@string/element_torque_fueltrimshortterm2</item>
         <item>@string/element_torque_fueltrimlongterm2</item>
         <item>@string/element_torque_accelerometer_total</item>
-
         <item>@string/element_torque_fuelrailpressure</item>
         <item>@string/element_torque_exhaustgastempbank1sensor1</item>
         <item>@string/element_torque_exhaustgastempbank1sensor2</item>
         <item>@string/element_torque_exhaustgastempbank1sensor3</item>
         <item>@string/element_torque_exhaustgastempbank1sensor4</item>
-
         <item>@string/element_torque_absolutethrottlepostion</item>
         <item>@string/element_torque_ambientairtemp</item>
         <item>@string/element_torque_catalysttemperature</item>
@@ -243,7 +234,6 @@
         <item>@string/element_torque_transmissiontemp</item>
         <item>@string/element_torque_transmissiontemp</item>
         <item>@string/element_torque_voltagemodule</item>
-
         <item>@string/element_test</item>
     </string-array>
 
@@ -271,13 +261,11 @@
         <item>torque-fueltrimshortterm2_0x08</item>
         <item>torque-fueltrimlongterm2_0x09</item>
         <item>torque-accelerometer_total_0xff1223</item>
-
         <item>torque-fuelrailpressure_0x23</item>
         <item>torque-exhaustgastempbank1sensor1_0x78</item>
         <item>torque-exhaustgastempbank1sensor2_0xff1282</item>
         <item>torque-exhaustgastempbank1sensor3_0xff1283</item>
         <item>torque-exhaustgastempbank1sensor4_0xff1284</item>
-
         <item>torque-absolutethrottlepostion_0x47</item>
         <item>torque-ambientairtemp_0x46</item>
         <item>torque-catalysttemperature_0x3c</item>
@@ -297,7 +285,6 @@
         <item>torque-transmissiontemp_0x0105</item>
         <item>torque-transmissiontemp_0xfe1805</item>
         <item>torque-voltagemodule_0x42</item>
-
         <item>test</item>
     </string-array>
 
