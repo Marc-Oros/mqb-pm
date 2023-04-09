@@ -1,4 +1,6 @@
 - Try to refactor the process for adding new measurements (Maybe try to group by types)
+- Move reading data from torque to a function that can be reused
+  - Return measurement, unit, max and min
 - (Investigate) Generate sensor list dynamically using torque data instead of hardcoding in xml
 - Try to catch error where Torque is not running in background and notify user instead of crashing the app
 - Figure out G meter that works in any phone orientation

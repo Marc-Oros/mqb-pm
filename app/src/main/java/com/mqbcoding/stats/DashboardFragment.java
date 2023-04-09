@@ -65,51 +65,53 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class DashboardFragment extends CarFragment {
-   public final String QUERY_NONE = "none";
-   public final String QUERY_TORQUE_RPM = "torque-rpm_0x0c";
-   public final String QUERY_TORQUE_SPEED = "torque-speed_0x0d";
-   public final String QUERY_TORQUE_FUELPRESSURE = "torque-fuelpressure_0x0a";
-   public final String QUERY_TORQUE_ENGINELOAD = "torque-engineload_0x04";
-   public final String QUERY_TORQUE_ENGINELOADABSOLUTE = "torque-engineloadabsolute_0x43";
-   public final String QUERY_TORQUE_TIMING_ADVANCE = "torque-timing_advance_0x0e";
-   public final String QUERY_TORQUE_INTAKE_AIR_TEMPERATURE = "torque-intake_air_temperature_0x0f";
-   public final String QUERY_TORQUE_MASS_AIR_FLOW = "torque-mass_air_flow_0x10";
-   public final String QUERY_TORQUE_THROTTLE_POSITION = "torque-throttle_position_0x11";
-   public final String QUERY_TORQUE_RELATIVETHROTTLEPOSITION = "torque-relativethrottleposition_0x45";
-   public final String QUERY_TORQUE_ABSOLUTETHROTTLEPOSTION = "torque-absolutethrottlepostion_0x47";
-   public final String QUERY_TORQUE_TURBOBOOST = "torque-turboboost_0xff1202";
-   public final String QUERY_TORQUE_VOLTAGE = "torque-voltage_0xff1238";
-   public final String QUERY_TORQUE_AFR = "torque-AFR_0xff1249";
-   public final String QUERY_TORQUE_AFRC = "torque-AFRc_0xff124d";
-   public final String QUERY_TORQUE_FUELTRIMSHORTTERM1 = "torque-fueltrimshortterm1_0x06";
-   public final String QUERY_TORQUE_FUELTRIMLONGTERM1 = "torque-fueltrimlongterm1_0x07";
-   public final String QUERY_TORQUE_FUELTRIMSHORTTERM2 = "torque-fueltrimshortterm2_0x08";
-   public final String QUERY_TORQUE_FUELTRIMLONGTERM2 = "torque-fueltrimlongterm2_0x09";
-   public final String QUERY_TORQUE_ACCELEROMETER_TOTAL = "torque-accelerometer_total_0xff1223";
-   public final String QUERY_TORQUE_PHONEBATTERYLEVEL = "torque-phonebatterylevel_0xff129a";
-   public final String QUERY_TORQUE_PHONEBAROMETER = "torque-phonebarometer_0xff1270";
-   public final String QUERY_TORQUE_OBDADAPTERVOLTAGE = "torque-obdadaptervoltage_0xff1238";
-   public final String QUERY_TORQUE_FUELLEVEL = "torque-fuellevel_0x2f";
-   public final String QUERY_TORQUE_VOLTAGEMODULE = "torque-voltagemodule_0x42";
-   public final String QUERY_TORQUE_OILTEMPERATURE = "torque-oiltemperature_0x5c";
-   public final String QUERY_TORQUE_TRANSMISSIONTEMP1 = "torque-transmissiontemp_0x0105";
-   public final String QUERY_TORQUE_TRANSMISSIONTEMP2 = "torque-transmissiontemp_0xfe1805";
-   public final String QUERY_TORQUE_PRESSURECONTROL = "torque-pressurecontrol_0x70";
-   public final String QUERY_TORQUE_INTAKEMANIFOLDPRESSURE = "torque-intakemanifoldpressure_0x0b";
-   public final String QUERY_TORQUE_COMMANDEDEQUIVALENCERATIOLAMBDA = "torque-commandedequivalenceratiolambda_0x44";
-   public final String QUERY_TORQUE_O2SENSOR1EQUIVALENCERATIO = "torque-o2sensor1equivalenceratio_0x34";
-   public final String QUERY_TORQUE_CHARGEAIRCOOLERTEMPERATURE = "torque-chargeaircoolertemperature_0x77";
-   public final String QUERY_TORQUE_ENGINECOOLANTTEMP = "torque-enginecoolanttemp_0x05";
-   public final String QUERY_TORQUE_AMBIENTAIRTEMP = "torque-ambientairtemp_0x46";
-   public final String QUERY_TORQUE_CATALYSTTEMPERATURE = "torque-catalysttemperature_0x3c";
-   public final String QUERY_TORQUE_FUELRAILPRESSURE = "torque-fuelrailpressure_0x23";
-   public final String QUERY_TORQUE_EXHAUSTGASTEMPBANK1SENSOR1 = "torque-exhaustgastempbank1sensor1_0x78";
-   public final String QUERY_TORQUE_EXHAUSTGASTEMPBANK1SENSOR2 = "torque-exhaustgastempbank1sensor2_0xff1282";
-   public final String QUERY_TORQUE_EXHAUSTGASTEMPBANK1SENSOR3 = "torque-exhaustgastempbank1sensor3_0xff1283";
-   public final String QUERY_TORQUE_EXHAUSTGASTEMPBANK1SENSOR4 = "torque-exhaustgastempbank1sensor4_0xff1284";
-   public final String QUERY_TORQUE_LONGITUDINALGFORCE = "torque-longitudinalgforce_0xff1220";
-   public final String QUERY_TORQUE_LATERALGFORCE = "torque-lateralgforce_0xff1221";
-   public final String QUERY_TEST = "test";
+    public final String QUERY_NONE = "none";
+    public final String QUERY_TEST = "test";
+    public final String QUERY_TORQUE_RPM = "torque-rpm_0x0c";
+    public final String QUERY_TORQUE_SPEED = "torque-speed_0x0d";
+    public final String QUERY_TORQUE_FUELPRESSURE = "torque-fuelpressure_0x0a";
+    public final String QUERY_TORQUE_ENGINELOAD = "torque-engineload_0x04";
+    public final String QUERY_TORQUE_ENGINELOADABSOLUTE = "torque-engineloadabsolute_0x43";
+    public final String QUERY_TORQUE_TIMING_ADVANCE = "torque-timing_advance_0x0e";
+    public final String QUERY_TORQUE_INTAKE_AIR_TEMPERATURE = "torque-intake_air_temperature_0x0f";
+    public final String QUERY_TORQUE_MASS_AIR_FLOW = "torque-mass_air_flow_0x10";
+    public final String QUERY_TORQUE_THROTTLE_POSITION = "torque-throttle_position_0x11";
+    public final String QUERY_TORQUE_RELATIVETHROTTLEPOSITION = "torque-relativethrottleposition_0x45";
+    public final String QUERY_TORQUE_ABSOLUTETHROTTLEPOSTION = "torque-absolutethrottlepostion_0x47";
+    public final String QUERY_TORQUE_TURBOBOOST = "torque-turboboost_0xff1202";
+    public final String QUERY_TORQUE_VOLTAGE = "torque-voltage_0xff1238";
+    public final String QUERY_TORQUE_AFR = "torque-AFR_0xff1249";
+    public final String QUERY_TORQUE_AFRC = "torque-AFRc_0xff124d";
+    public final String QUERY_TORQUE_FUELTRIMSHORTTERM1 = "torque-fueltrimshortterm1_0x06";
+    public final String QUERY_TORQUE_FUELTRIMLONGTERM1 = "torque-fueltrimlongterm1_0x07";
+    public final String QUERY_TORQUE_FUELTRIMSHORTTERM2 = "torque-fueltrimshortterm2_0x08";
+    public final String QUERY_TORQUE_FUELTRIMLONGTERM2 = "torque-fueltrimlongterm2_0x09";
+    public final String QUERY_TORQUE_ACCELEROMETER_TOTAL = "torque-accelerometer_total_0xff1223";
+    public final String QUERY_TORQUE_PHONEBATTERYLEVEL = "torque-phonebatterylevel_0xff129a";
+    public final String QUERY_TORQUE_PHONEBAROMETER = "torque-phonebarometer_0xff1270";
+    public final String QUERY_TORQUE_OBDADAPTERVOLTAGE = "torque-obdadaptervoltage_0xff1238";
+    public final String QUERY_TORQUE_FUELLEVEL = "torque-fuellevel_0x2f";
+    public final String QUERY_TORQUE_VOLTAGEMODULE = "torque-voltagemodule_0x42";
+    public final String QUERY_TORQUE_OILTEMPERATURE = "torque-oiltemperature_0x5c";
+    public final String QUERY_TORQUE_TRANSMISSIONTEMP1 = "torque-transmissiontemp_0x0105";
+    public final String QUERY_TORQUE_TRANSMISSIONTEMP2 = "torque-transmissiontemp_0xfe1805";
+    public final String QUERY_TORQUE_PRESSURECONTROL = "torque-pressurecontrol_0x70";
+    public final String QUERY_TORQUE_INTAKEMANIFOLDPRESSURE = "torque-intakemanifoldpressure_0x0b";
+    public final String QUERY_TORQUE_COMMANDEDEQUIVALENCERATIOLAMBDA = "torque-commandedequivalenceratiolambda_0x44";
+    public final String QUERY_TORQUE_O2SENSOR1EQUIVALENCERATIO = "torque-o2sensor1equivalenceratio_0x34";
+    public final String QUERY_TORQUE_CHARGEAIRCOOLERTEMPERATURE = "torque-chargeaircoolertemperature_0x77";
+    public final String QUERY_TORQUE_ENGINECOOLANTTEMP = "torque-enginecoolanttemp_0x05";
+    public final String QUERY_TORQUE_AMBIENTAIRTEMP = "torque-ambientairtemp_0x46";
+    public final String QUERY_TORQUE_CATALYSTTEMPERATURE = "torque-catalysttemperature_0x3c";
+    public final String QUERY_TORQUE_FUELRAILPRESSURE = "torque-fuelrailpressure_0x23";
+    public final String QUERY_TORQUE_EXHAUSTGASTEMPBANK1SENSOR1 = "torque-exhaustgastempbank1sensor1_0x78";
+    public final String QUERY_TORQUE_EXHAUSTGASTEMPBANK1SENSOR2 = "torque-exhaustgastempbank1sensor2_0xff1282";
+    public final String QUERY_TORQUE_EXHAUSTGASTEMPBANK1SENSOR3 = "torque-exhaustgastempbank1sensor3_0xff1283";
+    public final String QUERY_TORQUE_EXHAUSTGASTEMPBANK1SENSOR4 = "torque-exhaustgastempbank1sensor4_0xff1284";
+    public final String QUERY_TORQUE_LONGITUDINALGFORCE = "torque-longitudinalgforce_0xff1220";
+    public final String QUERY_TORQUE_LATERALGFORCE = "torque-lateralgforce_0xff1221";
+    public final String QUERY_TORQUE_HORSEPOWER = "torque-horsepower_0xff1226";
+    public final String QUERY_TORQUE_TORQUE = "torque-torque_0xff1225";
 
     private final String TAG = "DashboardFragment";
     private Timer updateTimer;
@@ -1544,6 +1546,12 @@ public class DashboardFragment extends CarFragment {
             case QUERY_TORQUE_LATERALGFORCE:
                 label.setText(getString(R.string.label_lateralgforce));
                 break;
+            case QUERY_TORQUE_HORSEPOWER:
+                label.setText(getString(R.string.label_horsepower));
+                break;
+            case QUERY_TORQUE_TORQUE:
+                label.setText(getString(R.string.label_torque));
+                break;
             default:
                 label.setText("");
                 value.setText("");
@@ -1733,9 +1741,6 @@ public class DashboardFragment extends CarFragment {
             case QUERY_TORQUE_OBDADAPTERVOLTAGE:
                 setupClock(icon, "ic_obd2", "", clock, false, torqueUnit, 0, 17, "float", "integer");
                 break;
-            case "torque-hybridbattlevel_0x5b":
-                setupClock(icon, "ic_battery", "", clock, false, "%", 0, 100, "float", "integer");
-                break;
             case QUERY_TORQUE_COMMANDEDEQUIVALENCERATIOLAMBDA:
                 setupClock(icon, "ic_none", "lambda", clock, false, torqueUnit, 0, 3, "float", "float");
                 break;
@@ -1779,6 +1784,12 @@ public class DashboardFragment extends CarFragment {
                 break;
             case QUERY_TORQUE_LATERALGFORCE:
                 setupClock(icon, "ic_lateral", "", clock, false, "G", -3, +3, "float", "integer");
+                break;
+            case QUERY_TORQUE_HORSEPOWER:
+                setupClock(icon, "ic_none", "PWR", clock, false, torqueUnit, 0, 350, "integer", "integer");
+                break;
+            case QUERY_TORQUE_TORQUE:
+                setupClock(icon, "ic_none", "TRQ", clock, false, torqueUnit, 0, 400, "integer", "integer");
                 break;
         }
 
@@ -1866,7 +1877,6 @@ public class DashboardFragment extends CarFragment {
                     case QUERY_TORQUE_PHONEBATTERYLEVEL:
                     case QUERY_TORQUE_PHONEBAROMETER:
                     case QUERY_TORQUE_OBDADAPTERVOLTAGE:
-                    case "torque-hybridbattlevel_0x5b":
                     case QUERY_TORQUE_VOLTAGE:
                     case QUERY_TORQUE_PRESSURECONTROL:
                     case QUERY_TORQUE_RELATIVETHROTTLEPOSITION:
@@ -1881,6 +1891,8 @@ public class DashboardFragment extends CarFragment {
                     case QUERY_TORQUE_FUELRAILPRESSURE:
                     case QUERY_TORQUE_LONGITUDINALGFORCE:
                     case QUERY_TORQUE_LATERALGFORCE:
+                    case QUERY_TORQUE_HORSEPOWER:
+                    case QUERY_TORQUE_TORQUE:
                         clock.setUnit(unitText); // use the units Torque is providing
                         break;
                     case QUERY_TORQUE_TURBOBOOST:
@@ -2245,15 +2257,7 @@ public class DashboardFragment extends CarFragment {
                 case QUERY_TORQUE_VOLTAGEMODULE:
                 case QUERY_TORQUE_LONGITUDINALGFORCE:
                 case QUERY_TORQUE_LATERALGFORCE:
-
                     // TODO: this seems useless, becuase we check the torqueQuery earlier than this
-                    // @TODO Icon for HP Measurement: ic_powermeter
-                    /**
-                     * @TODO PIDs to add:
-                     *  - ff1226: HP @wheels
-                     *  - ff1225: Torque @wheels
-                     *  - Double check list for GR Yaris specific PIDs
-                     */
 
                     queryElement = queryElement.substring(queryElement.lastIndexOf('_') + 1);
                     queryElement = queryElement.substring(2);
@@ -2296,6 +2300,8 @@ public class DashboardFragment extends CarFragment {
                     break;
                 case QUERY_TORQUE_RPM:
                 case QUERY_TORQUE_SPEED:
+                case QUERY_TORQUE_HORSEPOWER:
+                case QUERY_TORQUE_TORQUE:
                     queryElement = queryElement.substring(queryElement.lastIndexOf('_') + 1);
                     queryElement = queryElement.substring(2);
                     queryPid = new BigInteger(queryElement, 16).longValue();

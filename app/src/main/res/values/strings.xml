@@ -166,6 +166,8 @@
     <string name="element_torque_transmissiontemp2">Transmission temperature (method 2)</string>
     <string name="element_torque_longitudinalgforce">G meter (Longitudinal)</string>
     <string name="element_torque_lateralgforce">G meter (Lateral)</string>
+    <string name="element_torque_horsepower">Horsepower (Approximation)</string>
+    <string name="element_torque_torque">Torque (Approximation)</string>
 
     <!-- Labels (for clocks without icons) -->
     <string name="label_afrc">AFR(c)</string>
@@ -180,6 +182,8 @@
     <string name="label_ftlt1">FTlt1</string>
     <string name="label_longitudinalgforce">Lon. G</string>
     <string name="label_lateralgforce">Lat. G</string>
+    <string name="label_horsepower">Power</string>
+    <string name="label_torque">Torque</string>
 
     <!-- Backgrounds -->
     <string name="bg_vw">Discover Pro Sport</string>

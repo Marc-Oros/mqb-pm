@@ -52,6 +52,7 @@
     <!-- Names of Entries for clock/text data settings -->
     <string-array name="DataElementsEntries">
         <item>@string/element_none</item>
+        <item>@string/element_test</item>
         <!-- PIDs from Torque -->
         <item>@string/element_torque_rpm</item>
         <item>@string/element_torque_speed</item>
@@ -96,13 +97,15 @@
         <item>@string/element_torque_exhaustgastempbank1sensor4</item>
         <item>@string/element_torque_longitudinalgforce</item>
         <item>@string/element_torque_lateralgforce</item>
-        <item>@string/element_test</item>
+        <item>@string/element_torque_horsepower</item>
+        <item>@string/element_torque_torque</item>
     </string-array>
 
     <!-- Values/query strings for each of the Entries for clock data settings -->
     <!-- These NEED TO be aligned with DataElementsEntries!-->
     <string-array name="DataElementsValues">
         <item>none</item>
+        <item>test</item>
         <!-- PIDs from Torque -->
         <!-- Use PIDs like this: torque_<description>_<pid> -->
         <item>torque-rpm_0x0c</item>
@@ -148,55 +151,58 @@
         <item>torque-exhaustgastempbank1sensor4_0xff1284</item>
         <item>torque-longitudinalgforce_0xff1220</item>
         <item>torque-lateralgforce_0xff1221</item>
-        <item>test</item>
+        <item>torque-horsepower_0xff1226</item>
+        <item>torque-torque_0xff1225</item>
     </string-array>
 
     <string-array name="DataElementsIcons">
         <item>@drawable/ic_none</item>
-        <item>@drawable/ic_torque</item>
-        <item>@drawable/ic_torque</item>
-        <item>@drawable/ic_torque</item>
-        <item>@drawable/ic_torque</item>
-        <item>@drawable/ic_torque</item>
-        <item>@drawable/ic_torque</item>
-        <item>@drawable/ic_torque</item>
-        <item>@drawable/ic_torque</item>
-        <item>@drawable/ic_torque</item>
-        <item>@drawable/ic_torque</item>
-        <item>@drawable/ic_torque</item>
-        <item>@drawable/ic_torque</item>
-        <item>@drawable/ic_torque</item>
-        <item>@drawable/ic_torque</item>
-        <item>@drawable/ic_torque</item>
-        <item>@drawable/ic_torque</item>
-        <item>@drawable/ic_torque</item>
-        <item>@drawable/ic_torque</item>
-        <item>@drawable/ic_torque</item>
-        <item>@drawable/ic_torque</item>
-        <item>@drawable/ic_torque</item>
-        <item>@drawable/ic_torque</item>
-        <item>@drawable/ic_torque</item>
-        <item>@drawable/ic_torque</item>
-        <item>@drawable/ic_torque</item>
-        <item>@drawable/ic_torque</item>
-        <item>@drawable/ic_torque</item>
-        <item>@drawable/ic_torque</item>
-        <item>@drawable/ic_torque</item>
-        <item>@drawable/ic_torque</item>
-        <item>@drawable/ic_torque</item>
-        <item>@drawable/ic_torque</item>
-        <item>@drawable/ic_torque</item>
-        <item>@drawable/ic_torque</item>
-        <item>@drawable/ic_torque</item>
-        <item>@drawable/ic_torque</item>
-        <item>@drawable/ic_torque</item>
-        <item>@drawable/ic_torque</item>
-        <item>@drawable/ic_torque</item>
-        <item>@drawable/ic_torque</item>
-        <item>@drawable/ic_torque</item>
-        <item>@drawable/ic_torque</item>
-        <item>@drawable/ic_torque</item>
         <item>@drawable/ic_none</item>
+        <item>@drawable/ic_torque</item>
+        <item>@drawable/ic_torque</item>
+        <item>@drawable/ic_torque</item>
+        <item>@drawable/ic_torque</item>
+        <item>@drawable/ic_torque</item>
+        <item>@drawable/ic_torque</item>
+        <item>@drawable/ic_torque</item>
+        <item>@drawable/ic_torque</item>
+        <item>@drawable/ic_torque</item>
+        <item>@drawable/ic_torque</item>
+        <item>@drawable/ic_torque</item>
+        <item>@drawable/ic_torque</item>
+        <item>@drawable/ic_torque</item>
+        <item>@drawable/ic_torque</item>
+        <item>@drawable/ic_torque</item>
+        <item>@drawable/ic_torque</item>
+        <item>@drawable/ic_torque</item>
+        <item>@drawable/ic_torque</item>
+        <item>@drawable/ic_torque</item>
+        <item>@drawable/ic_torque</item>
+        <item>@drawable/ic_torque</item>
+        <item>@drawable/ic_torque</item>
+        <item>@drawable/ic_torque</item>
+        <item>@drawable/ic_torque</item>
+        <item>@drawable/ic_torque</item>
+        <item>@drawable/ic_torque</item>
+        <item>@drawable/ic_torque</item>
+        <item>@drawable/ic_torque</item>
+        <item>@drawable/ic_torque</item>
+        <item>@drawable/ic_torque</item>
+        <item>@drawable/ic_torque</item>
+        <item>@drawable/ic_torque</item>
+        <item>@drawable/ic_torque</item>
+        <item>@drawable/ic_torque</item>
+        <item>@drawable/ic_torque</item>
+        <item>@drawable/ic_torque</item>
+        <item>@drawable/ic_torque</item>
+        <item>@drawable/ic_torque</item>
+        <item>@drawable/ic_torque</item>
+        <item>@drawable/ic_torque</item>
+        <item>@drawable/ic_torque</item>
+        <item>@drawable/ic_torque</item>
+        <item>@drawable/ic_torque</item>
+        <item>@drawable/ic_torque</item>
+        <item>@drawable/ic_torque</item>
     </string-array>
 
     <string-array name="fontEntries">
