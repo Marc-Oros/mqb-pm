@@ -1,3 +1,2 @@
-- Set default values (theme, font and others. Minimize setup time when reinstalling app), check my phone for default values
 - Delete exlap functionality or stub it and replace it with Torque data
 - Double check that data in arrays.xml is ok
