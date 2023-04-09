@@ -592,7 +592,7 @@ public class DashboardFragment extends CarFragment {
             setupBackground(readedBackground);
         }
 
-        String readedFont = sharedPreferences.getString("selectedFont", "segments");
+        String readedFont = sharedPreferences.getString("selectedFont", "vw");
         if (!readedBackground.equals(selectedFont)) {
             setupTypeface(readedFont);
         }
