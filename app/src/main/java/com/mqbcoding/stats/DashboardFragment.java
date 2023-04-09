@@ -1389,7 +1389,6 @@ public class DashboardFragment extends CarFragment {
         }
 
 
-        // @TODO List of queries starts here
         // set the labels
         switch (queryElement) {
             case QUERY_NONE:
