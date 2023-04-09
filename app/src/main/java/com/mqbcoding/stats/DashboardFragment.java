@@ -3,11 +3,9 @@ package com.mqbcoding.stats;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ObjectAnimator;
-import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.content.SharedPreferences;
 import android.content.res.AssetManager;
@@ -17,7 +15,6 @@ import android.graphics.LightingColorFilter;
 import android.graphics.PorterDuff;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
-import android.location.Address;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
@@ -25,7 +22,6 @@ import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -1966,8 +1962,6 @@ public class DashboardFragment extends CarFragment {
         String currentLeftTitleValue = mTitleElementLeft.getText().toString();
         String currentNavDistanceTitleValue = mTitleElementNavDistance.getText().toString();
         String currentNavTimeTitleValue = mTitleElementNavTime.getText().toString();
-
-        // Display location in center of title bar:
 
         Boolean mProximity = (Boolean) mLastMeasurements.get("System_ProximityRecognition.InRange");
 

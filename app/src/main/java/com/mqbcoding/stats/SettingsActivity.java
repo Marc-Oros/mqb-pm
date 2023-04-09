@@ -1,18 +1,12 @@
 package com.mqbcoding.stats;
 
 import android.Manifest;
-import android.accounts.AccountManager;
-import android.app.Activity;
-import android.app.Dialog;
 import android.content.ComponentName;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.provider.Settings;
-import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
@@ -20,11 +14,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 
-import android.widget.Toast;
-
 import com.github.martoreto.aauto.vex.CarStatsClient;
-import com.google.android.gms.common.GoogleApiAvailability;
-import com.google.api.client.googleapis.extensions.android.gms.auth.GoogleAccountCredential;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,12 +23,7 @@ public class SettingsActivity extends AppCompatActivity {
     private static final String TAG = "SettingsActivity";
 
     private static final int REQUEST_PERMISSIONS = 0;
-    private static final int REQUEST_ACCOUNTS_PERMISSION = 1;
-    private static final int REQUEST_GOOGLE_PLAY_SERVICES = 2;
-    private static final int REQUEST_AUTHORIZATION = 3;
-    private static final int REQUEST_ACCOUNT_PICKER = 4;
-    private static final int REQUEST_LOCATION_PERMISSION = 5;
-
+    private static final int REQUEST_AUTHORIZATION = 1;
     static final String EXTRA_AUTHORIZATION_INTENT = "authorizationRequest";
 
     private static final String PERMISSION_CAR_VENDOR_EXTENSION = "com.google.android.gms.permission.CAR_VENDOR_EXTENSION";
@@ -56,7 +41,7 @@ public class SettingsActivity extends AppCompatActivity {
 
         handleIntent();
 
-        showNotificationSerrviceConfirmDialogIfNeeded();
+        showNotificationServiceConfirmDialogIfNeeded();
     }
 
     @Override
@@ -86,7 +71,7 @@ public class SettingsActivity extends AppCompatActivity {
         }
         return false;
     }
-    private void showNotificationSerrviceConfirmDialog() {
+    private void showNotificationServiceConfirmDialog() {
         new AlertDialog.Builder(this)
                 .setMessage("Please enable notification access in settings")
                 .setTitle("Notification Access")
@@ -106,9 +91,9 @@ public class SettingsActivity extends AppCompatActivity {
                         })
                 .create().show();
     }
-    private void showNotificationSerrviceConfirmDialogIfNeeded() {
+    private void showNotificationServiceConfirmDialogIfNeeded() {
         if (!isNotificationServiceEnabled()) {
-            showNotificationSerrviceConfirmDialog();
+            showNotificationServiceConfirmDialog();
         }
     }
 
