@@ -2,11 +2,12 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <!-- @TODO: Re-enable disabled settings if functionality is ever restored/fixed -->
+
     <PreferenceCategory
         android:singleLineTitle="false"
         android:title="@string/pref_appearance"
         android:layout="@layout/prefcat">
-
 
         <com.austingreco.imagelistpreference.ImageListPreference
             android:entries="@array/Themes"
@@ -45,7 +46,7 @@
         <CheckBoxPreference
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:defaultValue="false"
+            android:defaultValue="true"
             android:key="accurateActive"
             android:summaryOff="@string/pref_accurate_off"
             android:summaryOn="@string/pref_accurate_on"
@@ -437,10 +438,11 @@
         android:title="@string/pref_dataelementsettings_4"
         android:layout="@layout/prefcat">
 
-    <CheckBoxPreference
-        android:defaultValue="false"
-        android:key="d4_active"
-        android:title="@string/pref_enable_4nd_dash" />
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="d4_active"
+            android:enabled="false"
+            android:title="@string/pref_enable_4nd_dash" />
     </PreferenceCategory>
 
     <PreferenceCategory
@@ -451,6 +453,7 @@
         <CheckBoxPreference
             android:defaultValue="false"
             android:key="d5_active"
+            android:enabled="false"
             android:title="@string/pref_enable_5nd_dash" />
             app:ilp_backgroundTint="@android:color/transparent"
             app:ilp_entryImages="@array/TextDataElementsIcons"
@@ -504,7 +507,8 @@
         android:title="@string/pref_notifications_category_title"
         android:layout="@layout/prefcat">
         <CheckBoxPreference
-            android:defaultValue="true"
+            android:defaultValue="false"
+            android:enabled="false"
             android:key="oilTempMonitoringActive"
             android:summary="@string/pref_oil_temp_monitoring_summary"
             android:title="@string/pref_oil_temp_monitoring_title" />
@@ -517,6 +521,7 @@
             android:title="@string/pref_oil_temp_threshold_title" />
         <CheckBoxPreference
             android:defaultValue="false"
+            android:enabled="false"
             android:key="wheelStateMonitoringActive"
             android:summary="@string/pref_wheel_state_monitoring_summary"
             android:title="@string/pref_wheel_state_monitoring_title" />
@@ -527,7 +532,8 @@
         android:layout="@layout/prefcat">
         <!-- TODO: Localize and add summaries -->
         <CheckBoxPreference
-            android:defaultValue="true"
+            android:defaultValue="false"
+            android:enabled="false"
             android:key="engineSpeedMonitoringActive"
             android:title="@string/pref_enginespeed_monitor" />
 
@@ -581,7 +587,7 @@
         android:title="@string/pref_logging_category_title"
         android:layout="@layout/prefcat">
         <CheckBoxPreference
-            android:defaultValue="true"
+            android:defaultValue="false"
             android:key="statsLoggingActive"
             android:summary="@string/pref_stats_logging_summary"
             android:title="@string/pref_stats_logging_title" />
