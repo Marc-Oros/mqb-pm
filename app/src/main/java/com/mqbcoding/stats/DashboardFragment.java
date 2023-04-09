@@ -880,8 +880,8 @@ public class DashboardFragment extends CarFragment {
     private String getLabelClock (String queryClock ) {
         String mtext = "";
         if ((queryClock != null && !queryClock.equals(""))){
-            String[] valueArray = getResources().getStringArray(R.array.ClockDataElementsValues);
-            String[] stringArray = getResources().getStringArray(R.array.ClockDataElementsEntries);
+            String[] valueArray = getResources().getStringArray(R.array.DataElementsValues);
+            String[] stringArray = getResources().getStringArray(R.array.DataElementsEntries);
             int lindex = Arrays.asList(valueArray).indexOf(queryClock);
             if (lindex >= 0) {
                 mtext = stringArray[lindex];
@@ -1492,6 +1492,14 @@ public class DashboardFragment extends CarFragment {
             case "torque-voltagemodule_0x42":
                 label.setBackground(getContext().getDrawable(R.drawable.ic_voltage));
                 break;
+            case "torque-longitudinalgforce_0xff1220":
+                label.setText("Lon. G");
+                label.setBackground(getContext().getDrawable(R.drawable.ic_longitudinal));
+                break;
+            case "torque-lateralgforce_0xff1221":
+                label.setText("Lat. G");
+                label.setBackground(getContext().getDrawable(R.drawable.ic_lateral));
+                break;
             default:
                 label.setText("");
                 value.setText("");
@@ -1596,12 +1604,10 @@ public class DashboardFragment extends CarFragment {
         pressureMax = 5;
         pressureMin = -1;
 
-        //setupClock(icon, "ic_none", "", clock, false, "", 0, 100, "float");
-
         // setup each of the clocks:
         switch (queryLong) {
-            case "none": // currently impossible to choose, maybe in the future?
-                setupClock(icon, "ic_none", "", clock, false, "", 0, 100, "float", "float");
+            case "none":
+                setupClock(icon, "ic_none", "Off", clock, false, "", 0, 1, "float", "float");
                 break;
             case "test":
                 setupClock(icon, "ic_measurement", "", clock, false, getString(R.string.testing), 0, 360, "float", "integer");
@@ -1724,6 +1730,12 @@ public class DashboardFragment extends CarFragment {
             case "torque-fuelrailpressure_0x23":
                 setupClock(icon, "ic_fuelpressure", "", clock, false, torqueUnit, 0, 100, "float", "integer");
                 break;
+            case "torque-longitudinalgforce_0xff1220":
+                setupClock(icon, "ic_longitudinal", "", clock, false, "G", -3, +3, "float", "integer");
+                break;
+            case "torque-lateralgforce_0xff1221":
+                setupClock(icon, "ic_lateral", "", clock, false, "G", -3, +3, "float", "integer");
+                break;
         }
 
         // make the icon appear in the color of unitTextColor
@@ -1785,8 +1797,10 @@ public class DashboardFragment extends CarFragment {
             if (clockValue != null) {
                 switch (queryLong) {
                     case "test":
-                    case "none":    // none cannot happen currently
                         //don't do anything
+                        break;
+                    case "none":    // none cannot happen currently
+                        clockValue = 0f;
                         break;
                     case "torque-rpm_0x0c":
                         clockValue = clockValue / 1000;
@@ -1822,6 +1836,8 @@ public class DashboardFragment extends CarFragment {
                     case "torque-engineloadabsolute_0x43":
                     case "torque-fuellevel_0x2f":
                     case "torque-fuelrailpressure_0x23":
+                    case "torque-longitudinalgforce_0xff1220":
+                    case "torque-lateralgforce_0xff1221":
                         clock.setUnit(unitText); // use the units Torque is providing
                         break;
                     case "torque-turboboost_0xff1202":
@@ -2184,18 +2200,17 @@ public class DashboardFragment extends CarFragment {
                 case "torque-transmissiontemp_0x0105":
                 case "torque-transmissiontemp_0xfe1805":
                 case "torque-voltagemodule_0x42":
+                case "torque-longitudinalgforce_0xff1220":
+                case "torque-lateralgforce_0xff1221":
 
                     // TODO: this seems useless, becuase we check the torqueQuery earlier than this
-                    // @TODO Remove non torque codes
                     // @TODO Icon for HP Measurement: ic_powermeter
                     /**
                      * @TODO PIDs to add:
                      *  - ff1226: HP @wheels
                      *  - ff1225: Torque @wheels
-                     *  - b4: Trans temp (Method 2)
                      *  - Double check list for GR Yaris specific PIDs
                      */
-
 
                     queryElement = queryElement.substring(queryElement.lastIndexOf('_') + 1);
                     queryElement = queryElement.substring(2);

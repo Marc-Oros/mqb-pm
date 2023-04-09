@@ -340,4 +340,6 @@
     <string name="dash4_elementCenter5">Avg consumption:</string>
     <string name="locationSource_googlemaps">Google Maps</string>
     <string name="locationSource_geocoding">Geocoding</string>
+    <string name="element_torque_longitudinalgforce">G meter (Longitudinal)</string>
+    <string name="element_torque_lateralgforce">G meter (Lateral)</string>
 </resources>
