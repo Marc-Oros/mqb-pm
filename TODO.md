@@ -1,4 +1,3 @@
-- Double check permissions that might no longer be needed (accts, location)
 - Try to refactor the process for adding new measurements (Maybe try to group by types)
 - (Investigate) Generate sensor list dynamically using torque data instead of hardcoding in xml
 - Try to catch error where Torque is not running in background and notify user instead of crashing the app
