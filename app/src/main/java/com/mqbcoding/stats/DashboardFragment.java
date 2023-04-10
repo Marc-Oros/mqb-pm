@@ -282,24 +282,18 @@ public class DashboardFragment extends CarFragment {
         }
     };
 
-
-
     private final CarStatsClient.Listener mCarStatsListener = new CarStatsClient.Listener() {
         @Override
         public void onNewMeasurements(String provider, Date timestamp, Map<String, Object> values) {
             mLastMeasurements.putAll(values);
 
             postUpdate();
-
-            //Log.i(TAG, "onCarStatsClient.Listener");
         }
 
         @Override
         public void onSchemaChanged() {
             // do nothing
         }
-
-
     };
 
     private final ServiceConnection mVexServiceConnection = new ServiceConnection() {
@@ -319,7 +313,6 @@ public class DashboardFragment extends CarFragment {
             Log.i(TAG, "ServiceDisconnected");
         }
     };
-
 
     // random, for use in Test value
     private static float randFloat(float min, float max) {
@@ -365,7 +358,6 @@ public class DashboardFragment extends CarFragment {
         super.onAttach(context);
         Log.i(TAG, "onAttach");
     }
-
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -440,7 +432,6 @@ public class DashboardFragment extends CarFragment {
         mSpeedSeriesLeft = new LineGraphSeries<>();
         mSpeedSeriesCenter = new LineGraphSeries<>();
         mSpeedSeriesRight = new LineGraphSeries<>();
-
 
         //icons on the clocks
         mIconClockL = rootView.findViewById(R.id.icon_ClockLeft);
@@ -855,7 +846,6 @@ public class DashboardFragment extends CarFragment {
             //mClockRight.setIndicator(Indicator.Indicators.HalfLineIndicator);
 
             // do something to get the other type of indicator
-
         }
 
         // if rays on, turn off everything else.
@@ -896,7 +886,6 @@ public class DashboardFragment extends CarFragment {
         }
     }
 
-
     @Override
     public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -925,7 +914,6 @@ public class DashboardFragment extends CarFragment {
                 turnTickEnabled(ticksOn);
                 runStagingAnimation();
             }
-
         });
 
         androidClockFormat = android.text.format.DateFormat.is24HourFormat(getContext())
@@ -950,11 +938,8 @@ public class DashboardFragment extends CarFragment {
         return mtext;
     }
 
-
-
     private void runStagingAnimation() {
         if (!stagingDone) {
-
             mClockLeft.speedPercentTo(100, 1000);
             mClockCenter.speedPercentTo(100, 1000);
             mClockRight.speedPercentTo(100, 1000);
@@ -1021,11 +1006,8 @@ public class DashboardFragment extends CarFragment {
         Dashboard3_On = sharedPreferences.getBoolean("d3_active", false);  //Enabled dasboard3
         // @TODO Delete code related to these 2 or fix for non MQB
         Dashboard4_On = sharedPreferences.getBoolean("d4_active", false);  //Enabled dasboard4
-        //Dashboard5_On = sharedPreferences.getBoolean("d5_active", false);  //Enabled dasboard5
-        Dashboard5_On = false;
+        Dashboard5_On = sharedPreferences.getBoolean("d5_active", false);  //Enabled dasboard5
     }
-
-
 
     private void startTorque() {
         Intent intent = new Intent();
@@ -1042,7 +1024,6 @@ public class DashboardFragment extends CarFragment {
             Log.e("HU", "Unable to connect to Torque plugin service");
         }
     }
-
 
     private void stopTorque() {
         Intent sendIntent = new Intent();
@@ -1090,8 +1071,6 @@ public class DashboardFragment extends CarFragment {
 
         super.onPause();
     }
-
-
 
     @Override
     public void onDestroyView() {
@@ -1187,7 +1166,6 @@ public class DashboardFragment extends CarFragment {
         super.onDestroy();
     }
 
-
     private final static int UPDATE_AFTER = 200; //ms
     private long lastUpdate = -1;
     private void postUpdate() {
@@ -1279,9 +1257,7 @@ public class DashboardFragment extends CarFragment {
 
     };
 
-
     private void doUpdate() {
-
         if (mClockLeft == null) {
             return;
         }
@@ -1304,61 +1280,60 @@ public class DashboardFragment extends CarFragment {
             mConstraintClockCenter.setVisibility(View.VISIBLE);
             mConstraintClockRight.setVisibility(View.VISIBLE);
 
-        //update each of the elements:
-        updateElement(mElement1Query, mValueElement1, mIconElement1);
-        updateElement(mElement2Query, mValueElement2, mIconElement2);
-        updateElement(mElement3Query, mValueElement3, mIconElement3);
-        updateElement(mElement4Query, mValueElement4, mIconElement4);
+            //update each of the elements:
+            updateElement(mElement1Query, mValueElement1, mIconElement1);
+            updateElement(mElement2Query, mValueElement2, mIconElement2);
+            updateElement(mElement3Query, mValueElement3, mIconElement3);
+            updateElement(mElement4Query, mValueElement4, mIconElement4);
 
-        //update each of the clocks and the min/max/ray elements that go with it
-        // query, dial, visray, textmax, textmin, clockmax, clockmin)
+            //update each of the clocks and the min/max/ray elements that go with it
+            // query, dial, visray, textmax, textmin, clockmax, clockmin)
 
-        updateClock(mClockLQuery, mClockLeft, mRayLeft, mTextMaxLeft, mClockMaxLeft, mGraphLeft, mSpeedSeriesLeft, graphLeftLastXValue, mGraphValueLeft, MaxspeedLeft);
-        updateClock(mClockCQuery, mClockCenter, mRayCenter, mTextMaxCenter, mClockMaxCenter, mGraphCenter, mSpeedSeriesCenter, graphCenterLastXValue, mGraphValueCenter, MaxspeedCenter);
-        updateClock(mClockRQuery, mClockRight, mRayRight, mTextMaxRight,  mClockMaxRight,  mGraphRight, mSpeedSeriesRight, graphRightLastXValue, mGraphValueRight, MaxspeedRight);
+            updateClock(mClockLQuery, mClockLeft, mRayLeft, mTextMaxLeft, mClockMaxLeft, mGraphLeft, mSpeedSeriesLeft, graphLeftLastXValue, mGraphValueLeft, MaxspeedLeft);
+            updateClock(mClockCQuery, mClockCenter, mRayCenter, mTextMaxCenter, mClockMaxCenter, mGraphCenter, mSpeedSeriesCenter, graphCenterLastXValue, mGraphValueCenter, MaxspeedCenter);
+            updateClock(mClockRQuery, mClockRight, mRayRight, mTextMaxRight,  mClockMaxRight,  mGraphRight, mSpeedSeriesRight, graphRightLastXValue, mGraphValueRight, MaxspeedRight);
 
+            // get ambient color, change color of some elements to match the ambient color.
+            // this can't be done during setup, because then the ambientColor is probably not received yet.
+            if (ambientOn) {
+                String ambientColor =
+                        mLastMeasurements.containsKey("Car_ambienceLightColour.ColourSRGB")?
+                                (String) mLastMeasurements.get("Car_ambienceLightColour.ColourSRGB") : null;
+                //ambientColor = "#FF0000"; // for testing purposes
+                if (ambientColor != null && !ambientColor.equals("")) {
+                    int parsedColor = Color.parseColor(ambientColor);
 
-        // get ambient color, change color of some elements to match the ambient color.
-        // this can't be done during setup, because then the ambientColor is probably not received yet.
-        if (ambientOn) {
-            String ambientColor =
-                    mLastMeasurements.containsKey("Car_ambienceLightColour.ColourSRGB")?
-                            (String) mLastMeasurements.get("Car_ambienceLightColour.ColourSRGB") : null;
-            //ambientColor = "#FF0000"; // for testing purposes
-            if (ambientColor != null && !ambientColor.equals("")) {
-                int parsedColor = Color.parseColor(ambientColor);
+                    if ((parsedColor != mClockLeft.getIndicatorColor()) || ((parsedColor != mRayLeft.getLowSpeedColor()))){
+                        if (raysOn) {
+                            mRayLeft.setLowSpeedColor(parsedColor);
+                            mRayCenter.setLowSpeedColor(parsedColor);
+                            mRayRight.setLowSpeedColor(parsedColor);
+                            mRayLeft.setMediumSpeedColor(parsedColor);
+                            mRayCenter.setMediumSpeedColor(parsedColor);
+                            mRayRight.setMediumSpeedColor(parsedColor);
+                        } else {
+                            mClockLeft.setIndicatorColor(parsedColor);
+                            mClockCenter.setIndicatorColor(parsedColor);
+                            mClockRight.setIndicatorColor(parsedColor);
+                            mClockLeft.setIndicatorLightColor(parsedColor);
+                            mClockCenter.setIndicatorLightColor(parsedColor);
+                            mClockRight.setIndicatorLightColor(parsedColor);
+                        }
 
-                if ((parsedColor != mClockLeft.getIndicatorColor()) || ((parsedColor != mRayLeft.getLowSpeedColor()))){
-                    if (raysOn) {
-                        mRayLeft.setLowSpeedColor(parsedColor);
-                        mRayCenter.setLowSpeedColor(parsedColor);
-                        mRayRight.setLowSpeedColor(parsedColor);
-                        mRayLeft.setMediumSpeedColor(parsedColor);
-                        mRayCenter.setMediumSpeedColor(parsedColor);
-                        mRayRight.setMediumSpeedColor(parsedColor);
-                    } else {
-                        mClockLeft.setIndicatorColor(parsedColor);
-                        mClockCenter.setIndicatorColor(parsedColor);
-                        mClockRight.setIndicatorColor(parsedColor);
-                        mClockLeft.setIndicatorLightColor(parsedColor);
-                        mClockCenter.setIndicatorLightColor(parsedColor);
-                        mClockRight.setIndicatorLightColor(parsedColor);
-                    }
+                        switch (selectedBackground) {
+                            case "background_incar_dots":
+                            case "background_incar_skoda2":
+                                int resId = getResources().getIdentifier(selectedBackground, "drawable", getContext().getPackageName());
+                                Drawable wallpaperImage = ContextCompat.getDrawable(getContext(),resId);
 
-                    switch (selectedBackground) {
-                        case "background_incar_dots":
-                        case "background_incar_skoda2":
-                            int resId = getResources().getIdentifier(selectedBackground, "drawable", getContext().getPackageName());
-                            Drawable wallpaperImage = ContextCompat.getDrawable(getContext(),resId);
+                                wallpaperImage.setColorFilter(new LightingColorFilter(parsedColor, Color.parseColor("#010101")));
 
-                            wallpaperImage.setColorFilter(new LightingColorFilter(parsedColor, Color.parseColor("#010101")));
-
-                            rootView.setBackground(wallpaperImage);
-                            break;
+                                rootView.setBackground(wallpaperImage);
+                                break;
+                        }
                     }
                 }
             }
-        }
         } else {
             mConstraintElementLeft.setVisibility(View.VISIBLE);
             mConstraintElementCenter.setVisibility(View.VISIBLE);
@@ -1381,14 +1356,12 @@ public class DashboardFragment extends CarFragment {
 
     // this sets all the labels/values in an initial state, depending on the chosen options
     private void setupElement(String queryElement, TextView value, TextView label) {
-
         //set element label/value to default value first
         label.setBackgroundResource(0);
         value.setVisibility(View.VISIBLE);
         value.setText("-");
         label.setText("");
         String icon = "";
-
 
         // set items to have a "-" as value.
         //todo: clean this up. This can be done much nicer.
@@ -1401,7 +1374,6 @@ public class DashboardFragment extends CarFragment {
             label.setText("");
             value.setText("-");
         }
-
 
         // set the labels
         switch (queryElement) {
@@ -1597,18 +1569,15 @@ public class DashboardFragment extends CarFragment {
                 break;
         }
 
-
         if (icon.equals("empty")) {
             label.setBackgroundResource(0);
             ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams) label.getLayoutParams();
             params.width = 40;
             label.setLayoutParams(params);
-
         }
     }
 
     private void setupGraph(Speedometer clock, GraphView graph, LineGraphSeries<DataPoint> serie, ConstraintLayout constraint) {
-
         TypedArray typedArray = getContext().getTheme().obtainStyledAttributes(new int[]{R.attr.themedBlankDialBackground});
         int blankBackgroundResource = typedArray.getResourceId(0, 0);
         typedArray.recycle();
@@ -1652,7 +1621,6 @@ public class DashboardFragment extends CarFragment {
         int torqueMin = 0;
         int torqueMax = 100;
 
-
         TypedArray typedArray2 = getContext().getTheme().obtainStyledAttributes(new int[]{R.attr.themedStopWatchBackground});
         int swBackgroundResource = typedArray2.getResourceId(0, 0);
         typedArray2.recycle();
@@ -1672,7 +1640,6 @@ public class DashboardFragment extends CarFragment {
                 torqueMax = result.max;
             }
         }
-
 
         Log.d(TAG, "minmax speed: " + torqueMin + " " + torqueMax);
 
@@ -1992,21 +1959,18 @@ public class DashboardFragment extends CarFragment {
 
                 graph.getViewport().setMaxY(clock.getMaxSpeed());
                 graph.getViewport().setMinY(clock.getMinSpeed());
-
             }
 
             // get the speed from the clock and have the high-visibility rays move to this speed as well
-
             boolean noNewData = clockValue==null;
-            if (noNewData)
-                clockValue=oldValue;
-
+            if (noNewData) {
+                clockValue = oldValue;
+            }
 
             //TODO: Updates with a non fixed period could lead to strange graphs
             series.appendData(new DataPoint(graphLastXValue, clockValue), true, 2400);
             String tempString = (String.format(Locale.US, FORMAT_DECIMALS, clockValue));
             graphValue.setText(tempString);
-
 
             // don't update when there's nothing to update
             // check if old value and new value (rounded to 1 decimal placed) are equal
@@ -2045,7 +2009,6 @@ public class DashboardFragment extends CarFragment {
       */
     }
 
-
     private String getTime() {
         String clockFormat = "hh:mm a";
 
@@ -2066,7 +2029,6 @@ public class DashboardFragment extends CarFragment {
         return new SimpleDateFormat(clockFormat, Locale.US).format(new Date());
     }
 
-
     private Boolean checkTextNav(String mText){
         Boolean mistWrong = false;
         String str2=" �";
@@ -2083,7 +2045,6 @@ public class DashboardFragment extends CarFragment {
     }
 
     private void updateTitle() {
-
         String currentTitleValue = mTitleElement.getText().toString();
         String currentRightTitleValue = mTitleElementRight.getText().toString();
         String currentLeftTitleValue = mTitleElementLeft.getText().toString();
@@ -2091,7 +2052,6 @@ public class DashboardFragment extends CarFragment {
         String currentNavTimeTitleValue = mTitleElementNavTime.getText().toString();
 
         Boolean mProximity = (Boolean) mLastMeasurements.get("System_ProximityRecognition.InRange");
-
 
         //mProximity = true;
         if (mProximity != null && mProximity && proximityOn) {
@@ -2111,8 +2071,6 @@ public class DashboardFragment extends CarFragment {
             mTitleConsumptionRight.setVisibility(View.VISIBLE);
             mTitleConsumptionLeft.setVisibility(View.VISIBLE);
             mTitleConsumptionCenter.setVisibility(View.VISIBLE);
-
-
         } else if (!proximityOn) {
             ObjectAnimator animation;
             if (dashboardNum<4) animation = ObjectAnimator.ofFloat(mDashboard_gaudes, "y", 90);
@@ -2129,7 +2087,6 @@ public class DashboardFragment extends CarFragment {
             mTitleConsumptionRight.setVisibility(View.INVISIBLE);
             mTitleConsumptionLeft.setVisibility(View.INVISIBLE);
             mTitleConsumptionCenter.setVisibility(View.INVISIBLE);
-
         } else {
             mTitleClockLeft.setText("");
             mTitleClockCenter.setText("");
@@ -2199,7 +2156,6 @@ public class DashboardFragment extends CarFragment {
         // Display NAV Time, only value <> 0
         Float currentNavTime = (Float) mLastMeasurements.get("Nav_GuidanceRemaining.RTT");
 
-
         //       int testValueTime = 2100;
         //       currentNavTime = new Float(testValueTime);
         Date time = new Date();
@@ -2257,9 +2213,7 @@ public class DashboardFragment extends CarFragment {
         else {
             mTitleNAVDestinationAddress.setVisibility(View.INVISIBLE);
         }
-
     }
-
 
     //update the elements
     private void updateElement(String queryElement, TextView value, TextView label) {
@@ -2364,7 +2318,6 @@ public class DashboardFragment extends CarFragment {
 
     // set clock label, units, etc.
     private void setupClock(TextView icon, String iconDrawableName, String iconText, Speedometer clock, Boolean backgroundWithWarningArea, String unit, Integer minspeed, Integer maxspeed, String speedFormat, String tickFormat) {
-
         Log.d(TAG, "icon: " + icon + " iconDrawableName: " + iconDrawableName);
 
         int resId = getResources().getIdentifier(iconDrawableName, "drawable", getContext().getPackageName());
@@ -2388,14 +2341,12 @@ public class DashboardFragment extends CarFragment {
             clock.setTickTextFormat(Gauge.INTEGER_FORMAT);
         }
 
-
         //dynamically scale the icon_space in case there's only an icon, and no text
         if (!iconText.equals("") && resId == resIdEmpty) {
             ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams) icon.getLayoutParams();
             params.width = 40;
             icon.setLayoutParams(params);
         }
-
 
         // determine if an empty background, without red warning area is wanted
         if (!backgroundWithWarningArea) {
