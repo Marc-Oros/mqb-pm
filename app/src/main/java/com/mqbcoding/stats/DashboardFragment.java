@@ -116,6 +116,14 @@ public class DashboardFragment extends CarFragment {
     public final String QUERY_TORQUE_GRYTRANSTEMP = "torque-grytranstemp_0x221638";
     public final String QUERY_TORQUE_GRYSTEERINGANGLE = "torque-grysteeringangle_0x221004";
     public final String QUERY_TORQUE_GRYCOUPLINGTEMP = "torque-grycouplingtemp_0x221026";
+    public final String QUERY_TORQUE_GRYFLTIRETEMP = "torque-gryfltiretemp_0x221004";
+    public final String QUERY_TORQUE_GRYFRTIRETEMP = "torque-gryfrtiretemp_0x221004";
+    public final String QUERY_TORQUE_GRYRLTIRETEMP = "torque-gryrltiretemp_0x221004";
+    public final String QUERY_TORQUE_GRYRRTIRETEMP = "torque-gryrrtiretemp_0x221004";
+    public final String QUERY_TORQUE_GRYFLTIREPRESSURE = "torque-gryfltirepressure_0x221005";
+    public final String QUERY_TORQUE_GRYFRTIREPRESSURE = "torque-gryfrtirepressure_0x221005";
+    public final String QUERY_TORQUE_GRYRLTIREPRESSURE = "torque-gryrltirepressure_0x221005";
+    public final String QUERY_TORQUE_GRYRRTIREPRESSURE = "torque-gryrrtirepressure_0x221005";
 
     private final String TAG = "DashboardFragment";
     private Timer updateTimer;
@@ -1545,10 +1553,10 @@ public class DashboardFragment extends CarFragment {
                 label.setBackground(getContext().getDrawable(R.drawable.ic_voltage));
                 break;
             case QUERY_TORQUE_LONGITUDINALGFORCE:
-                label.setText(getString(R.string.label_longitudinalgforce));
+                label.setBackground(getContext().getDrawable(R.drawable.ic_longitudinal));
                 break;
             case QUERY_TORQUE_LATERALGFORCE:
-                label.setText(getString(R.string.label_lateralgforce));
+                label.setBackground(getContext().getDrawable(R.drawable.ic_lateral));
                 break;
             case QUERY_TORQUE_HORSEPOWER:
                 label.setText(getString(R.string.label_horsepower));
@@ -1569,6 +1577,18 @@ public class DashboardFragment extends CarFragment {
             case QUERY_TORQUE_GRYCOUPLINGTEMP:
                 value.setText(FORMAT_TEMPERATURE0);
                 label.setText("AWD");
+                break;
+            case QUERY_TORQUE_GRYFLTIRETEMP:
+            case QUERY_TORQUE_GRYFRTIRETEMP:
+            case QUERY_TORQUE_GRYRLTIRETEMP:
+            case QUERY_TORQUE_GRYRRTIRETEMP:
+                label.setBackground(getContext().getDrawable(R.drawable.ic_wheel));
+                break;
+            case QUERY_TORQUE_GRYFLTIREPRESSURE:
+            case QUERY_TORQUE_GRYFRTIREPRESSURE:
+            case QUERY_TORQUE_GRYRLTIREPRESSURE:
+            case QUERY_TORQUE_GRYRRTIREPRESSURE:
+                label.setBackground(getContext().getDrawable(R.drawable.ic_wheel));
                 break;
             default:
                 label.setText("");
@@ -1644,27 +1664,13 @@ public class DashboardFragment extends CarFragment {
         }
         // get min/max values and unit from torque
         if (queryTrim.equals("torque")) {
-            queryClock = queryClock.substring(queryClock.lastIndexOf('_') + 1);
-            queryClock = queryClock.substring(2);
-            long queryPid = new BigInteger(queryClock, 16).longValue();
+            TorquePIDResult result = this.getTorquePIDData(this.getPidFromTorqueQuery(queryClock));
 
-            try {
-                if (torqueService != null) {
-                    torqueUnit = torqueService.getUnitForPid(queryPid);
-
-                    //todo: use torque min and max values to determine min/max values for torque elements
-                    torqueMin = Math.round(torqueService.getMinValueForPid(queryPid));
-                    torqueMax = Math.round(torqueService.getMaxValueForPid(queryPid));
-                    if (torqueMin == torqueMax) {
-                        torqueMin = torqueMax - 1;  // prevent min and max are equal. Speedview cannot handle this.
-                    }
-                }
-            } catch (Exception e) {
-                Log.e(TAG, "Error: " + e.getMessage());
+            if (result != null) {
+                torqueUnit = result.unit;
+                torqueMin = result.min;
+                torqueMax = result.max;
             }
-        } else {
-            torqueMin = 0;
-            torqueMax = 100;
         }
 
 
@@ -1821,6 +1827,22 @@ public class DashboardFragment extends CarFragment {
             case QUERY_TORQUE_GRYCOUPLINGTEMP:
                 setupClock(icon, "ic_none", "AWD", clock, true, torqueUnit, torqueMin, torqueMax, "float", "float");
                 break;
+            case QUERY_TORQUE_GRYFLTIRETEMP:
+            case QUERY_TORQUE_GRYFLTIREPRESSURE:
+                setupClock(icon, "ic_none", "FL", clock, false, torqueUnit, torqueMin, torqueMax, "float", "float");
+                break;
+            case QUERY_TORQUE_GRYFRTIRETEMP:
+            case QUERY_TORQUE_GRYFRTIREPRESSURE:
+                setupClock(icon, "ic_none", "FR", clock, false, torqueUnit, torqueMin, torqueMax, "float", "float");
+                break;
+            case QUERY_TORQUE_GRYRLTIRETEMP:
+            case QUERY_TORQUE_GRYRLTIREPRESSURE:
+                setupClock(icon, "ic_none", "RL", clock, false, torqueUnit, torqueMin, torqueMax, "float", "float");
+                break;
+            case QUERY_TORQUE_GRYRRTIRETEMP:
+            case QUERY_TORQUE_GRYRRTIREPRESSURE:
+                setupClock(icon, "ic_none", "RR", clock, false, torqueUnit, torqueMin, torqueMax, "float", "float");
+                break;
         }
 
         // make the icon appear in the color of unitTextColor
@@ -1856,22 +1878,14 @@ public class DashboardFragment extends CarFragment {
             String queryLong = query;
             String unitText = "";
 
-            // Get the value that should be put on the clock, depending on the query
-            // torque pid queries use torqueService.getValueForPid(queryPid), queryPid is trimmed from the query string
             String queryTrim = query.contains("-") ? query.substring(0, query.indexOf("-")) : "other";
             switch (queryTrim) {
                 case "torque":
-                    query = query.substring(query.lastIndexOf('_') + 1);
-                    query = query.substring(2);
-                    long queryPid = new BigInteger(query, 16).longValue();
+                    TorquePIDResult result = this.getTorquePIDData(this.getPidFromTorqueQuery(query));
 
-                    try {
-                        if (torqueService != null) {
-                            clockValue = torqueService.getValueForPid(queryPid, true);
-                            unitText = torqueService.getUnitForPid(queryPid);
-                        }
-                    } catch (Exception e) {
-                        Log.e(TAG, "Error: " + e.getMessage());
+                    if (result != null) {
+                        clockValue = result.value;
+                        unitText = result.unit;
                     }
                     break;
                 default:  // the only other kind of query is the  "random" one.
@@ -1928,6 +1942,10 @@ public class DashboardFragment extends CarFragment {
                         break;
                     case QUERY_TORQUE_TURBOBOOST:
                     case QUERY_TORQUE_GRYOILPRESSURE:
+                    case QUERY_TORQUE_GRYFLTIREPRESSURE:
+                    case QUERY_TORQUE_GRYFRTIREPRESSURE:
+                    case QUERY_TORQUE_GRYRLTIREPRESSURE:
+                    case QUERY_TORQUE_GRYRRTIREPRESSURE:
                         if (unitText.equals("psi") && pressureUnit.equals("bar")) {
                             clockValue = clockValue / 14.5037738f;
                             unitText = "bar";
@@ -1948,6 +1966,10 @@ public class DashboardFragment extends CarFragment {
                     case QUERY_TORQUE_EXHAUSTGASTEMPBANK1SENSOR4:
                     case QUERY_TORQUE_GRYCOUPLINGTEMP:
                     case QUERY_TORQUE_GRYTRANSTEMP:
+                    case QUERY_TORQUE_GRYFLTIRETEMP:
+                    case QUERY_TORQUE_GRYFRTIRETEMP:
+                    case QUERY_TORQUE_GRYRLTIRETEMP:
+                    case QUERY_TORQUE_GRYRRTIRETEMP:
                         if (unitText.equals("°C") && temperatureUnit.equals("°C")) {
                             unitText = "°C";
                         } else {
@@ -2242,6 +2264,7 @@ public class DashboardFragment extends CarFragment {
     //update the elements
     private void updateElement(String queryElement, TextView value, TextView label) {
         long queryPid;
+        TorquePIDResult result;
         if (queryElement != null) {
             switch (queryElement) {
                 case QUERY_NONE:
@@ -2295,44 +2318,32 @@ public class DashboardFragment extends CarFragment {
                 case QUERY_TORQUE_GRYTRANSTEMP:
                 case QUERY_TORQUE_GRYSTEERINGANGLE:
                 case QUERY_TORQUE_GRYCOUPLINGTEMP:
-                    // TODO: this seems useless, becuase we check the torqueQuery earlier than this
+                case QUERY_TORQUE_GRYFLTIRETEMP:
+                case QUERY_TORQUE_GRYFRTIRETEMP:
+                case QUERY_TORQUE_GRYRLTIRETEMP:
+                case QUERY_TORQUE_GRYRRTIRETEMP:
+                    result = this.getTorquePIDData(this.getPidFromTorqueQuery(queryElement));
 
-                    queryElement = queryElement.substring(queryElement.lastIndexOf('_') + 1);
-                    queryElement = queryElement.substring(2);
-                    queryPid = new BigInteger(queryElement, 16).longValue();
-                    float torqueData;
-
-                    try {
-                        if (torqueService != null) {
-                            torqueData = torqueService.getValueForPid(queryPid, true);
-                            String unitText = torqueService.getUnitForPid(queryPid);
-                            value.setText(String.format(Locale.US, FORMAT_DECIMALS_WITH_UNIT, torqueData, unitText));
-                        }
-                    } catch (Exception e) {
-                        Log.e(TAG, "Error: " + e.getMessage());
+                    if (result != null) {
+                        value.setText(String.format(Locale.US, FORMAT_DECIMALS_WITH_UNIT, result.value, result.unit));
                     }
                     break;
                 case QUERY_TORQUE_TURBOBOOST:
-                    queryElement = queryElement.substring(queryElement.lastIndexOf('_') + 1);
-                    queryElement = queryElement.substring(2);
-                    queryPid = new BigInteger(queryElement, 16).longValue();
-                    float torqueData3;
+                case QUERY_TORQUE_GRYFLTIREPRESSURE:
+                case QUERY_TORQUE_GRYFRTIREPRESSURE:
+                case QUERY_TORQUE_GRYRLTIREPRESSURE:
+                case QUERY_TORQUE_GRYRRTIREPRESSURE:
+                    result = this.getTorquePIDData(this.getPidFromTorqueQuery(queryElement));
 
-                    try {
-                        if (torqueService != null) {
-                            torqueData3 = torqueService.getValueForPid(queryPid, true);
-
-
-                            String unitText = torqueService.getUnitForPid(queryPid);
-                            // workaround for Torque displaying the unit for turbo pressure
-                            if (unitText.equals("psi") && pressureUnit.equals("bar")) {
-                                torqueData3 = torqueData3 / 14.5037738f;
-                                unitText = "bar";
-                            }
-                            value.setText(String.format(Locale.US, FORMAT_DECIMALS_WITH_UNIT, torqueData3,unitText));
+                    if (result != null) {
+                        String unitText = result.unit;
+                        float pidValue = result.value;
+                        // workaround for Torque displaying the unit for turbo pressure
+                        if (unitText.equals("psi") && pressureUnit.equals("bar")) {
+                            pidValue = pidValue / 14.5037738f;
+                            unitText = "bar";
                         }
-                    } catch (Exception e) {
-                        Log.e(TAG, "Error: " + e.getMessage());
+                        value.setText(String.format(Locale.US, FORMAT_DECIMALS_WITH_UNIT, pidValue, unitText));
                     }
                     break;
                 // the following torque values should have the unit as label
@@ -2340,18 +2351,11 @@ public class DashboardFragment extends CarFragment {
                 case QUERY_TORQUE_SPEED:
                 case QUERY_TORQUE_HORSEPOWER:
                 case QUERY_TORQUE_TORQUE:
-                    queryElement = queryElement.substring(queryElement.lastIndexOf('_') + 1);
-                    queryElement = queryElement.substring(2);
-                    queryPid = new BigInteger(queryElement, 16).longValue();
-                    try {
-                        if (torqueService != null) {
-                            float torqueData2 = torqueService.getValueForPid(queryPid, true);
-                            String unitText = torqueService.getUnitForPid(queryPid);
-                            value.setText(String.format(Locale.US, FORMAT_NO_DECIMALS, torqueData2));
-                            label.setText(unitText);
-                        }
-                    } catch (Exception e) {
-                        Log.e(TAG, "Error: " + e.getMessage());
+                    result = this.getTorquePIDData(this.getPidFromTorqueQuery(queryElement));
+
+                    if (result != null) {
+                        value.setText(String.format(Locale.US, FORMAT_NO_DECIMALS, result.value));
+                        label.setText(result.unit);
                     }
                     break;
             }
@@ -2452,5 +2456,34 @@ public class DashboardFragment extends CarFragment {
                     public void onAnimationEnd(Animator animation) {
                     }
                 });
+    }
+
+    private TorquePIDResult getTorquePIDData(long queryPid) {
+        try {
+            TorquePIDResult result = new TorquePIDResult();
+
+            if (torqueService != null) {
+                result.value = torqueService.getValueForPid(queryPid, true);
+                result.unit = torqueService.getUnitForPid(queryPid);
+
+                result.min = Math.round(torqueService.getMinValueForPid(queryPid));
+                result.max = Math.round(torqueService.getMaxValueForPid(queryPid));
+                if (result.min == result.max) {
+                    result.min = result.max - 1;  // prevent min and max are equal. Speedview cannot handle this.
+                }
+
+                return result;
+            }
+        } catch (Exception e) {
+            Log.e(TAG, "Error: " + e.getMessage());
+        }
+
+        return null;
+    }
+
+    private long getPidFromTorqueQuery(String query) {
+        query = query.substring(query.lastIndexOf('_') + 1);
+        query = query.substring(2);
+        return new BigInteger(query, 16).longValue();
     }
 }

@@ -103,6 +103,14 @@
         <item>@string/element_torque_gry_transtemperature</item>
         <item>@string/element_torque_gry_steeringangle</item>
         <item>@string/element_torque_gry_couplingtemp</item>
+        <item>@string/element_torque_gry_fltiretemp</item>
+        <item>@string/element_torque_gry_frtiretemp</item>
+        <item>@string/element_torque_gry_rltiretemp</item>
+        <item>@string/element_torque_gry_rrtiretemp</item>
+        <item>@string/element_torque_gry_fltirepressure</item>
+        <item>@string/element_torque_gry_frtirepressure</item>
+        <item>@string/element_torque_gry_rltirepressure</item>
+        <item>@string/element_torque_gry_rrtirepressure</item>
     </string-array>
 
     <!-- Values/query strings for each of the Entries for clock data settings -->
@@ -161,11 +169,27 @@
         <item>torque-grytranstemp_0x221638</item>
         <item>torque-grysteeringangle_0x221004</item>
         <item>torque-grycouplingtemp_0x221026</item>
+        <item>torque-gryfltiretemp_0x221004</item>
+        <item>torque-gryfrtiretemp_0x221004</item>
+        <item>torque-gryrltiretemp_0x221004</item>
+        <item>torque-gryrrtiretemp_0x221004</item>
+        <item>torque-gryfltirepressure_0x221005</item>
+        <item>torque-gryfrtirepressure_0x221005</item>
+        <item>torque-gryrltirepressure_0x221005</item>
+        <item>torque-gryrrtirepressure_0x221005</item>
     </string-array>
 
     <string-array name="DataElementsIcons">
         <item>@drawable/ic_none</item>
         <item>@drawable/ic_none</item>
+        <item>@drawable/ic_torque</item>
+        <item>@drawable/ic_torque</item>
+        <item>@drawable/ic_torque</item>
+        <item>@drawable/ic_torque</item>
+        <item>@drawable/ic_torque</item>
+        <item>@drawable/ic_torque</item>
+        <item>@drawable/ic_torque</item>
+        <item>@drawable/ic_torque</item>
         <item>@drawable/ic_torque</item>
         <item>@drawable/ic_torque</item>
         <item>@drawable/ic_torque</item>

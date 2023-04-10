@@ -172,6 +172,14 @@
     <string name="element_torque_gry_transtemperature">(GR Yaris) M/T Oil Temperature</string>
     <string name="element_torque_gry_steeringangle">(GR Yaris) Steering Angle</string>
     <string name="element_torque_gry_couplingtemp">(GR Yaris) Temperature Sense Value in Coupling</string>
+    <string name="element_torque_gry_fltiretemp">(GR Yaris) Tire Temperature (FL)</string>
+    <string name="element_torque_gry_frtiretemp">(GR Yaris) Tire Temperature (FR)</string>
+    <string name="element_torque_gry_rltiretemp">(GR Yaris) Tire Temperature (RL)</string>
+    <string name="element_torque_gry_rrtiretemp">(GR Yaris) Tire Temperature (RR)</string>
+    <string name="element_torque_gry_fltirepressure">(GR Yaris) Tire Pressure (FL)</string>
+    <string name="element_torque_gry_frtirepressure">(GR Yaris) Tire Pressure (FR)</string>
+    <string name="element_torque_gry_rltirepressure">(GR Yaris) Tire Pressure (RL)</string>
+    <string name="element_torque_gry_rrtirepressure">(GR Yaris) Tire Pressure (RR)</string>
 
     <!-- Labels (for clocks without icons) -->
     <string name="label_afrc">AFR(c)</string>
