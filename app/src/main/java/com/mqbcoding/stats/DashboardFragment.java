@@ -180,7 +180,6 @@ public class DashboardFragment extends CarFragment {
     private String mLabelClockL, mLabelClockC, mLabelClockR;
     private HashMap<String, FieldSchema> mSchema;
 
-
     // notation formats
     private static final String FORMAT_DECIMALS = "%.1f";
     private static final String FORMAT_DECIMALS_WITH_UNIT = "%.1f %s";
@@ -213,9 +212,7 @@ public class DashboardFragment extends CarFragment {
         sc.hideTitle();
     }
 
-
     // todo: reset min/max when clock is touched
-
     private final View.OnClickListener resetMinMax = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -351,7 +348,6 @@ public class DashboardFragment extends CarFragment {
         }
         return convertedGear;
     }
-
 
     @Override
     public void onAttach(Context context) {
@@ -816,16 +812,17 @@ public class DashboardFragment extends CarFragment {
 
     private void setupIndicators() {
         int clockSize = mClockLeft.getHeight();
+
         if (clockSize == 0) {
             clockSize = 250;
         }
+
         //this is to enable an image as indicator.
         TypedArray typedArray = getContext().getTheme().obtainStyledAttributes(new int[]{R.attr.themedNeedle});
         int resourceId = typedArray.getResourceId(0, 0);
         typedArray.recycle();
 
         ImageIndicator imageIndicator = new ImageIndicator(getContext(), resourceId, clockSize, clockSize);
-
 
         int color = mClockLeft.getIndicatorColor();
         Log.i(TAG, "IndicatorColor: " + color);
@@ -852,7 +849,6 @@ public class DashboardFragment extends CarFragment {
         // it doesn't look too efficient at the moment, but that's to prevent the theme from adding an indicator to the rays.
         if (raysOn) {
             // todo: move this to setupClock
-
             mClockLeft.setIndicator(Indicator.Indicators.NoIndicator);
             mClockCenter.setIndicator(Indicator.Indicators.NoIndicator);
             mClockRight.setIndicator(Indicator.Indicators.NoIndicator);
@@ -865,21 +861,21 @@ public class DashboardFragment extends CarFragment {
             mClockLeft.setIndicatorLightColor(Color.parseColor("#00FFFFFF"));
             mClockCenter.setIndicatorLightColor(Color.parseColor("#00FFFFFF"));
             mClockRight.setIndicatorLightColor(Color.parseColor("#00FFFFFF"));
-//
+
             mRayLeft.setIndicatorLightColor(Color.parseColor("#00FFFFFF"));
             mRayRight.setIndicatorLightColor(Color.parseColor("#00FFFFFF"));
             mRayCenter.setIndicatorLightColor(Color.parseColor("#00FFFFFF"));
-
-
         } else if (color == -14575885) {
             //if theme has transparent indicator color, give clocks a custom image indicator
             //todo: do this on other fragments as well
             mClockLeft.setIndicator(imageIndicator);
             mClockCenter.setIndicator(imageIndicator);
             mClockRight.setIndicator(imageIndicator);
+
             mClockLeft.setIndicatorLightColor(Color.parseColor("#00FFFFFF"));
             mClockCenter.setIndicatorLightColor(Color.parseColor("#00FFFFFF"));
             mClockRight.setIndicatorLightColor(Color.parseColor("#00FFFFFF"));
+
             mRayLeft.setIndicatorLightColor(Color.parseColor("#00FFFFFF"));
             mRayRight.setIndicatorLightColor(Color.parseColor("#00FFFFFF"));
             mRayCenter.setIndicatorLightColor(Color.parseColor("#00FFFFFF"));
@@ -2360,7 +2356,6 @@ public class DashboardFragment extends CarFragment {
         } else if (speedFormat.equals("integer")) {
             clock.setSpeedTextFormat(Gauge.INTEGER_FORMAT);
         }
-
     }
 
     private final ServiceConnection torqueConnection = new ServiceConnection() {
