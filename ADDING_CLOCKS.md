@@ -10,3 +10,4 @@
   - `com.mqbcoding.stats.DashboardFragment.updateElement`
   - `com.mqbcoding.stats.DashboardFragment.setupClocks`
   - `com.mqbcoding.stats.DashboardFragment.updateClock`
+  - `com.mqbcoding.stats.DashboardFragment.getPidFromTorqueQuery`

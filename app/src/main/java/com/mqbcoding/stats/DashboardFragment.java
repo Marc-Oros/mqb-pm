@@ -18,6 +18,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
+import android.os.RemoteException;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
@@ -49,6 +50,7 @@ import org.jetbrains.annotations.NotNull;
 import org.prowl.torque.remote.ITorqueService;
 
 import java.math.BigInteger;
+import java.sql.Array;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
@@ -179,6 +181,10 @@ public class DashboardFragment extends CarFragment {
     private Button mBtnNext, mBtnPrev;
     private String mLabelClockL, mLabelClockC, mLabelClockR;
     private HashMap<String, FieldSchema> mSchema;
+
+    private HashMap<String, String> queryToPidIdMap = new HashMap<>();
+
+    private String[] pidList = null;
 
     // notation formats
     private static final String FORMAT_DECIMALS = "%.1f";
@@ -2404,16 +2410,19 @@ public class DashboardFragment extends CarFragment {
                 });
     }
 
-    private TorquePIDResult getTorquePIDData(long queryPid) {
+    private TorquePIDResult getTorquePIDData(String pidId) {
         try {
-            TorquePIDResult result = new TorquePIDResult();
-
             if (torqueService != null) {
-                result.value = torqueService.getValueForPid(queryPid, true);
-                result.unit = torqueService.getUnitForPid(queryPid);
+                TorquePIDResult result = new TorquePIDResult();
+                String[] pidArray = new String[]{pidId};
 
-                result.min = Math.round(torqueService.getMinValueForPid(queryPid));
-                result.max = Math.round(torqueService.getMaxValueForPid(queryPid));
+                String[] pidInfo = torqueService.getPIDInformation(pidArray)[0].split(",");
+
+                result.value = torqueService.getPIDValues(pidArray)[0];
+                result.unit = pidInfo[2];
+
+                result.min = Math.round(Float.parseFloat(pidInfo[4]));
+                result.max = Math.round(Float.parseFloat(pidInfo[3]));
                 if (result.min == result.max) {
                     result.min = result.max - 1;  // prevent min and max are equal. Speedview cannot handle this.
                 }
@@ -2427,9 +2436,91 @@ public class DashboardFragment extends CarFragment {
         return null;
     }
 
-    private long getPidFromTorqueQuery(String query) {
+    private String getPidFromTorqueQuery(String query) {
+        if (query.startsWith("torque-gry")) {
+            return this.getPidIdFromQuery(query);
+        }
+
         query = query.substring(query.lastIndexOf('_') + 1);
         query = query.substring(2);
-        return new BigInteger(query, 16).longValue();
+        query = query + ",0";
+
+        return query;
+    }
+
+    private String getPidIdFromQuery(String query) {
+        if (this.queryToPidIdMap.containsKey(query)) {
+            return this.queryToPidIdMap.get(query);
+        }
+        
+        if (torqueService == null) {
+            return "";
+        }
+
+        String sensorName;
+
+        switch (query) {
+            case "torque-gryoilpressure_0x221074":
+                sensorName = "Engine Oil Pressure";
+                break;
+            case "torque-grytranstemp_0x221638":
+                sensorName = "M/T Oil Temperature";
+                break;
+            case "torque-grysteeringangle_0x221004":
+                sensorName = "Steering Angle";
+                break;
+            case "torque-grycouplingtemp_0x221026":
+                sensorName = "Temperature Sensor Value in Coupling";
+                break;
+            case "torque-gryfltiretemp_0x221004":
+                sensorName = "Tire ID 1 Temperature";
+                break;
+            case "torque-gryfrtiretemp_0x221004":
+                sensorName = "Tire ID 2 Temperature";
+                break;
+            case "torque-gryrltiretemp_0x221004":
+                sensorName = "Tire ID 3 Temperature";
+                break;
+            case "torque-gryrrtiretemp_0x221004":
+                sensorName = "Tire ID 4 Temperature";
+                break;
+            case "torque-gryfltirepressure_0x221005":
+                sensorName = "Tire ID 1 Pressure";
+                break;
+            case "torque-gryfrtirepressure_0x221005":
+                sensorName = "Tire ID 2 Pressure";
+                break;
+            case "torque-gryrltirepressure_0x221005":
+                sensorName = "Tire ID 3 Pressure";
+                break;
+            case "torque-gryrrtirepressure_0x221005":
+                sensorName = "Tire ID 4 Pressure";
+                break;
+            default:
+                Log.e(TAG, "Query " + query + " not found!");
+                return "";
+        }
+
+        try {
+            if (this.pidList == null) {
+                this.pidList = torqueService.listAllPIDs();
+            }
+
+            String[] pidInfo;
+            String pidId;
+
+            for (int i = this.pidList.length - 1; i >= 0; i--) {
+                pidId = this.pidList[i];
+                pidInfo = torqueService.getPIDInformation(new String[]{pidId})[0].split(",");
+
+                if (pidInfo.length >= 1 && pidInfo[0].equals(sensorName)) {
+                    return pidId;
+                }
+            }
+        } catch (Exception e) {
+            Log.e(TAG, "Error: " + e.getMessage());
+        }
+
+        return "";
     }
 }
