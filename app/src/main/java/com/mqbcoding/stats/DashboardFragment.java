@@ -1683,7 +1683,7 @@ public class DashboardFragment extends CarFragment {
                 setupClock(icon, "ic_gearbox", "", clock, false, "°", 0, 200, "float", "integer");
                 break;
             case QUERY_TORQUE_TURBOBOOST:
-                setupClock(icon, "ic_turbo", "", clock, true, torqueUnit, torqueMin, torqueMax, "float", "float");
+                setupClock(icon, "ic_turbo", "", clock, true, torqueUnit, -2, 2, "float", "float");
                 break;
             case QUERY_TORQUE_FUELLEVEL:
                 setupClock(icon, "ic_fuelprimary", "", clock, false, "l", 0, 100, "float", "integer");
@@ -1906,7 +1906,6 @@ public class DashboardFragment extends CarFragment {
                     case QUERY_TORQUE_LATERALGFORCE:
                     case QUERY_TORQUE_HORSEPOWER:
                     case QUERY_TORQUE_TORQUE:
-                    case QUERY_TORQUE_GRYSTEERINGANGLE:
                         clock.setUnit(unitText); // use the units Torque is providing
                         break;
                     case QUERY_TORQUE_TURBOBOOST:
@@ -1947,6 +1946,10 @@ public class DashboardFragment extends CarFragment {
                             clockValue = clockValue + 32;
                         }
                         clock.setUnit(unitText);
+                        break;
+                    case QUERY_TORQUE_GRYSTEERINGANGLE:
+                        clock.setUnit(unitText);
+                        clockValue = clockValue * -1; // Steering Angle sign should be reversed
                         break;
                 }
 

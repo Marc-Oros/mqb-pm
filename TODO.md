@@ -14,3 +14,5 @@
     - Pressure
     - Temp
     - Figure out how to query a duplicate PID with multiple equations
+- Debug Oil Pressure (GRY) and tire metrics
+- Investigate is refresh rate can be changed
